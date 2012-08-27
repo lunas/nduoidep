@@ -25,6 +25,7 @@ end
 #Reads environment variables from a .env file in the project root (.gitignored so secret variables aren't in github)
 gem 'dotenv', :groups => [:development, :test]
 
+gem 'haml-rails'
 gem 'jquery-rails'
 gem 'devise'
 gem 'omniauth-twitter'
