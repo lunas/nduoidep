@@ -28,6 +28,7 @@ gem 'dotenv', :groups => [:development, :test]
 gem 'jquery-rails'
 gem 'devise'
 gem 'omniauth-twitter'
+gem "omniauth-facebook"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

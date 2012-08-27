@@ -233,4 +233,6 @@ Devise.setup do |config|
   raise "Go register your app with dev.Twitter.com and put the consumer key and secret into your environment." if ENV["TWITTER_CONSUMER_KEY"].nil? or ENV["TWITTER_CONSUMER_SECRET"].nil?
   config.omniauth :twitter, ENV["TWITTER_CONSUMER_KEY"], ENV["TWITTER_CONSUMER_SECRET"]
 
+  raise "Go register your app with developer.Facebook.com and put the app ID and app secret into your environment." if ENV["FACEBOOK_APP_ID"].nil? or ENV["FACEBOOK_APP_SECRET"].nil?
+  config.omniauth :facebook, ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_APP_SECRET"]
 end
