@@ -15,6 +15,7 @@ gem 'awesome_print'
 gem 'state_machine'
 gem 'simple_form'
 gem 'typus'
+gem 'cancan'
 
 gem 'km'
 gem 'newrelic_rpm'

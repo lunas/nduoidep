@@ -38,6 +38,29 @@ class User < ActiveRecord::Base
     else
       super
     end
-    end
+  end
+
+  ## Roles:
+  #  A user can have several roles, and one role can be shared by several users.
+  #  But this approach doesn't use a habtm relation, there isn't even a Role model.
+  #  Roles are stored in an integer field users.roles_mask.
+
+  def self.with_role(role)
+    where("roles_mask & #{2**ROLES.index(role.to_s)} > 0" )
+  end
+
+  ROLES = %w[admin moderator standard]
+
+  def roles=(roles)
+    self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.sum
+  end
+
+  def roles
+    ROLES.reject { |r| ((roles_mask || 0) & 2**ROLES.index(r)).zero? }
+  end
+
+  def role?(role)
+    roles.include? role.to_s
+  end
 
 end
