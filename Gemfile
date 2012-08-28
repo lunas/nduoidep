@@ -26,6 +26,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'omniauth-twitter'
 gem "omniauth-facebook"
+gem "factory_girl_rails"
 
 group :development, :test do
   #https://github.com/bkeepers/dotenv
