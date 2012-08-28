@@ -8,6 +8,11 @@ gem 'rails', '3.2.6'
 gem 'pg'
 gem 'haml'
 gem 'ffaker'
+gem "paperclip", "~> 3.0"
+gem "html_truncator", "~>0.2"
+gem 'sanitize'
+gem 'awesome_print'
+gem 'state_machine'
 
 # Gems used only for assets and not required
 # in production environments by default.
