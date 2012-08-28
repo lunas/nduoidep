@@ -14,6 +14,7 @@ gem 'sanitize'
 gem 'awesome_print'
 gem 'state_machine'
 gem 'simple_form'
+gem 'typus'
 
 # Gems used only for assets and not required
 # in production environments by default.
