@@ -21,15 +21,18 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-#https://github.com/bkeepers/dotenv
-#Reads environment variables from a .env file in the project root (.gitignored so secret variables aren't in github)
-gem 'dotenv', :groups => [:development, :test]
-
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'devise'
 gem 'omniauth-twitter'
 gem "omniauth-facebook"
+
+group :development, :test do
+  #https://github.com/bkeepers/dotenv
+  #Reads environment variables from a .env file in the project root (.gitignored so secret variables aren't in github)
+  gem 'dotenv'
+  gem 'rspec-rails'
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
