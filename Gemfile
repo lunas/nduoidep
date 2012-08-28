@@ -17,6 +17,9 @@ gem 'simple_form'
 gem 'typus'
 gem 'cancan'
 
+gem 'hpricot'
+gem 'ruby_parser'
+
 gem 'km'
 gem 'newrelic_rpm'
 
