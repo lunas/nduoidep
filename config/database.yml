@@ -6,7 +6,7 @@ development:
   username: postgres
   password: pg
 
-test:
+test: &test
   adapter: postgresql
   encoding: unicode
   database: CISeed_test
@@ -21,3 +21,6 @@ production:
   pool: 5
   username: postgres
   password: pg
+
+cucumber:
+  <<: *test
