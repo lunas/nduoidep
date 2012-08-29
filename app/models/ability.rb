@@ -10,6 +10,7 @@ class Ability
       can :manage, :all
     else
       can :read, :all
+      can :update, User, id: user.id  # Not-Admins can only update their own profile
     end
 
     # The first argument to `can` is the action you are giving the user permission to do.
