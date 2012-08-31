@@ -12,7 +12,7 @@ class SeedController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render_for_api :show, :json => User.all }    # there's a route match '/users' to: 'seed#index'
+      format.json { render_for_api api_template(params), :json => User.all }    # there's a route match '/users' to: 'seed#index'
     end
   end
 

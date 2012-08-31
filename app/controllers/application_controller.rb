@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  include ApplicationHelper
 
   # If you want to ensure authorization happens on every action in your application, un-comment:
   # check_authorization

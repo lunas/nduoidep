@@ -66,10 +66,15 @@ class User < ActiveRecord::Base
   end
 
 
-  api_accessible :show do |template|
+  api_accessible :api_v1 do |template|
     template.add :username
     template.add :email
+  end
+
+  api_accessible :api_v11, :extend => :api_v1 do |template|
     template.add :roles
   end
 
+  api_accessible :api_latest, :extend => :api_v11 do |template|
+  end
 end
