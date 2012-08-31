@@ -6,7 +6,9 @@ class SeedController < ApplicationController
   authorize_resource class: false, except: [:index]
 
   def index
-    flash[:notice] = "Welcome to the Concrete Interactive Seed application."
+    welcome = "Welcome to the Concrete Interactive Seed application."
+    flash[:notice] = welcome
+    Resque.enqueue(ResqueExampleTask, welcome)
   end
 
   def show

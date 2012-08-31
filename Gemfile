@@ -15,7 +15,6 @@ gem 'state_machine'
 gem 'simple_form'
 gem 'typus'
 gem 'cancan'
-
 gem 'hpricot'
 gem 'ruby_parser'
 
@@ -56,6 +55,10 @@ group :test do
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
 end
+
+# Background workers talking to redis server
+#
+gem 'resque', :require => 'resque/server'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

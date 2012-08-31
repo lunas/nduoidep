@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
     where("roles_mask & #{2**ROLES.index(role.to_s)} > 0" )
   end
 
-  ROLES = %w[admin standard]
+  ROLES = %w[standard admin]
 
   def roles=(roles)
     self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.sum
