@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
+  acts_as_api
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username
   # attr_accessible :title, :body
@@ -61,6 +63,13 @@ class User < ActiveRecord::Base
 
   def role?(role)
     roles.include? role.to_s
+  end
+
+
+  api_accessible :show do |template|
+    template.add :username
+    template.add :email
+    template.add :roles
   end
 
 end

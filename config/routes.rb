@@ -6,6 +6,8 @@ Blog::Application.routes.draw do
                      controllers: {omniauth_callbacks: "omniauth_callbacks",
                                    :registrations => "registrations"}
   root to: 'seed#index'
+  resources :seed, :only => [:index]
+
   match :show, to: 'seed#show'  # just an example route to demonstrate cancan's authorization!
   match :edit, to: 'seed#edit'  # just an example route to demonstrate cancan's authorization!
 

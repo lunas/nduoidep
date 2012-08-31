@@ -9,6 +9,11 @@ class SeedController < ApplicationController
     welcome = "Welcome to the Concrete Interactive Seed application."
     flash[:notice] = welcome
     Resque.enqueue(ResqueExampleTask, welcome)
+
+    respond_to do |format|
+      format.html
+      format.json { render_for_api :show, :json => User.all }    # there's a route match '/users' to: 'seed#index'
+    end
   end
 
   def show
