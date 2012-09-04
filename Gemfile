@@ -15,6 +15,8 @@ gem 'state_machine'
 gem 'simple_form'
 gem 'typus'
 gem 'cancan'
+gem 'decent_exposure'
+
 gem 'hpricot'
 gem 'ruby_parser'
 
