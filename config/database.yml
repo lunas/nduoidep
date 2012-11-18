@@ -21,3 +21,11 @@ production:
   pool: 5
   username: nguoidep
   password: nguoidep
+
+proxied-appfog:
+  adapter: mysql2
+  database: d8e11af817d0d41dbbee94b16d93259e5
+  username: u6robzx6voe48
+  password: pRO4p1qkifW5c
+  port: 10000
+  host: 127.0.0.1

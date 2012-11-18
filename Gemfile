@@ -5,7 +5,7 @@ gem 'rails' #, '3.2.6'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'rake', '0.8.7'  # version 0.9.2 somehow broken, according to stackoverflow
+gem 'rake' #, '0.8.7'  # version 0.9.2 somehow broken, according to stackoverflow
 
 gem 'haml'
 gem 'ffaker'
@@ -44,6 +44,9 @@ gem 'haml-rails'
 #gem "omniauth-facebook"
 gem "factory_girl_rails"
 
+gem 'devise'
+gem 'cloudfoundry-devise', :require => 'devise'
+
 group :development, :test do
   #https://github.com/bkeepers/dotenv
   #Reads environment variables from a .env file in the project root (.gitignored so secret variables aren't in github)
@@ -51,7 +54,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'sqlite3'
   gem 'jquery-rails'
-  gem 'devise'
 end
 
 group :test do
@@ -62,7 +64,6 @@ end
 group :production do
   gem 'mysql2'
   gem 'cloudfoundry-jquery-rails'
-  gem 'cloudfoundry-devise', :require => 'devise'
 end
 
 # Background workers talking to redis server
