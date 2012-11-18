@@ -7,9 +7,6 @@ gem 'rails' #, '3.2.6'
 
 gem 'rake', '0.8.7'  # version 0.9.2 somehow broken, according to stackoverflow
 
-#gem 'mysql2'
-gem 'sqlite3'
-
 gem 'haml'
 gem 'ffaker'
 gem "html_truncator", "~>0.2"
@@ -24,8 +21,6 @@ gem 'decent_exposure'
 gem 'hpricot'
 gem 'ruby_parser'
 
-gem 'km'
-gem 'newrelic_rpm'
 gem 'carrierwave'
 
 gem 'acts_as_api'
@@ -45,8 +40,6 @@ group :assets do
 end
 
 gem 'haml-rails'
-gem 'jquery-rails'
-gem 'devise'
 #gem 'omniauth-twitter'
 #gem "omniauth-facebook"
 gem "factory_girl_rails"
@@ -56,11 +49,20 @@ group :development, :test do
   #Reads environment variables from a .env file in the project root (.gitignored so secret variables aren't in github)
   gem 'dotenv'
   gem 'rspec-rails'
+  gem 'sqlite3'
+  gem 'jquery-rails'
+  gem 'devise'
 end
 
 group :test do
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
+end
+
+group :production do
+  gem 'mysql2'
+  gem 'cloudfoundry-jquery-rails'
+  gem 'cloudfoundry-devise', :require => 'devise'
 end
 
 # Background workers talking to redis server
