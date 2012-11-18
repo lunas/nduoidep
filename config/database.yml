@@ -1,26 +1,23 @@
 development:
-  adapter: postgresql
-  encoding: unicode
-  database: CISeed_development
+  adapter: mysql2
+  encoding: utf8
+  database: nguoidep_development
   pool: 5
-  username: postgres
-  password: pg
+  username: nguoidep
+  password: nguoidep
 
-test: &test
-  adapter: postgresql
-  encoding: unicode
-  database: CISeed_test
+test:
+  adapter: mysql2
+  encoding: utf8
+  database: nguoidep_test
   pool: 5
-  username: postgres
-  password: pg
+  username: nguoidep
+  password: nguoidep
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  database: CISeed_production
+  adapter: myssql2
+  encoding: utf8
+  database: nguoidep_production
   pool: 5
-  username: postgres
-  password: pg
-
-cucumber:
-  <<: *test
+  username: nguoidep
+  password: nguoidep

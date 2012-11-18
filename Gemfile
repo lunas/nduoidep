@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.6'
+gem 'rails' #, '3.2.6'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
+gem 'mysql2'
+
 gem 'haml'
 gem 'ffaker'
 gem "html_truncator", "~>0.2"
@@ -43,8 +44,8 @@ end
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'devise'
-gem 'omniauth-twitter'
-gem "omniauth-facebook"
+#gem 'omniauth-twitter'
+#gem "omniauth-facebook"
 gem "factory_girl_rails"
 
 group :development, :test do
@@ -55,7 +56,6 @@ group :development, :test do
 end
 
 group :test do
-  gem 'cucumber-rails', :require => false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
 end
