@@ -1,5 +1,5 @@
 development:
-  adapter: mysql2
+  adapter: sqlite3
   encoding: utf8
   database: nguoidep_development
   pool: 5
@@ -7,7 +7,7 @@ development:
   password: nguoidep
 
 test:
-  adapter: mysql2
+  adapter: sqlite3
   encoding: utf8
   database: nguoidep_test
   pool: 5
@@ -15,7 +15,7 @@ test:
   password: nguoidep
 
 production:
-  adapter: myssql2
+  adapter: sqlite3
   encoding: utf8
   database: nguoidep_production
   pool: 5

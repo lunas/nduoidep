@@ -5,7 +5,10 @@ gem 'rails' #, '3.2.6'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+gem 'rake', '0.8.7'  # version 0.9.2 somehow broken, according to stackoverflow
+
+#gem 'mysql2'
+gem 'sqlite3'
 
 gem 'haml'
 gem 'ffaker'
