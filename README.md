@@ -1,4 +1,4 @@
-# CISeed Application
+nguidep
 
 Run these commands to try it out.
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Ignore the local .env file which contains secret stuff like passwords to S3, etc.
 .env
 .DS_Store
@@ -13,3 +14,21 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+=======
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+.rspec
+/.bundle
+/vendor/bundle
+/log/*
+/tmp/*
+/db/*.sqlite3
+/public/system/*
+/coverage/
+/spec/tmp/*
+**.orig
+rerun.txt
+pickle-email-*.html
+>>>>>>> 02d397c3fcaaedbf28b40027c632bfc2092d3ad0
