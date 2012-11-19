@@ -1,8 +1,13 @@
 Typus.setup do |config|
+  config.authentication = :devise
 
   # Application name.
-  # config.admin_title = "Typus"
-  # config.admin_sub_title = ""
+  config.admin_title = "Nguoi Dep Magazine NY"
+  config.admin_sub_title = "Administrative Panel"
+
+  config.relationship = 'users'
+  config.user_class_name = "User"
+  config.user_foreign_key = 'user_id'
 
   # When mailer_sender is set, password recover is enabled. This email
   # address will be used in Admin::Mailer.
@@ -34,7 +39,7 @@ Typus.setup do |config|
 
   # Pagination options: These options are passed to the pagination method
   # which can be Kaminari or WillPaginate.
-  # config.pagination = { :previous_label => "&larr; " + Typus::I18n.t("Previous"),
-  #                       :next_label => Typus::I18n.t("Next") + " &rarr;" }
+  config.pagination = { :previous_label => "&larr; " + Typus::I18n.t("Previous"),
+                        :next_label => Typus::I18n.t("Next") + " &rarr;" }
 
 end

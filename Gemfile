@@ -17,6 +17,7 @@ gem 'simple_form'
 gem 'typus'
 gem 'cancan'
 gem 'decent_exposure'
+gem 'kaminari'
 
 gem 'hpricot'
 gem 'ruby_parser'

@@ -1,5 +1,11 @@
 Blog::Application.routes.draw do
 
+  resources :pages
+
+
+  resources :issues
+
+
   get "registrations/edit"
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
@@ -19,5 +25,15 @@ Blog::Application.routes.draw do
   constraints resque_constraint do
     mount Resque::Server, :at => "/admin/jobs"
   end
+
+  namespace :admin do
+    resources :users
+
+    resources :issues do
+      resources :pages
+    end
+  end
+
+  #get :admin, to: "admin/authentications#index"
 
 end

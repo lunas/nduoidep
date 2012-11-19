@@ -1,0 +1,9 @@
+Issue:
+  fields:
+    default: title, date
+    form: title, date
+    #list: title, date, created_at, updated_at
+  relationships: pages
+  application: Application
+  #filters: date
+  #search: title, date

@@ -1,4 +1,10 @@
+require 'typus/orm/active_record/user/instance_methods'
+require 'typus/orm/active_record/user/instance_methods_more'
+
 class User < ActiveRecord::Base
+  include Typus::Orm::ActiveRecord::User::InstanceMethods
+  include Typus::Orm::ActiveRecord::User::InstanceMethodsMore
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
