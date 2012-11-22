@@ -15,4 +15,9 @@ class Page < ActiveRecord::Base
   def self.page_nrs
     pluck(:page_nr)
   end
+  def image_preview
+    if self.image?
+      "<img src=\"#{self.image}\" width=\"100\" />".html_safe
+    end
+  end
 end

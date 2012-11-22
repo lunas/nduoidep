@@ -2,7 +2,7 @@ Page:
   fields:
     default: title, company, image, page_nr, comment
     form: title, company, image, page_nr, comment
-    list: title, company, image, page_nr, comment, created_at, updated_at
+    list: image_preview, company, title, page_nr, created_at, updated_at
     options:
       templates:
         image: carrierwave

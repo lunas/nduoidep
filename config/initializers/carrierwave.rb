@@ -14,7 +14,7 @@ else
         :region                 => 'us-west-1'
     }
     config.fog_directory  = 'nguoidep'
-    config.fog_host = "http://#{config.fog_directory}.s3.amazonaws.com" # make carrierwave not use SSL
+    config.asset_host = "http://#{config.fog_directory}.s3.amazonaws.com" # make carrierwave not use SSL
     config.fog_public     = true
     config.fog_attributes = {'Cache-Control' => 'max-age=315576000'}
   end
