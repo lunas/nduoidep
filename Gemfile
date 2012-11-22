@@ -23,6 +23,7 @@ gem 'hpricot'
 gem 'ruby_parser'
 
 gem 'carrierwave'
+gem "fog", "~> 1.3.1"
 
 gem 'acts_as_api'
 

@@ -4,7 +4,10 @@ class Page < ActiveRecord::Base
 
   belongs_to :issue
 
-  # Typus methods
+  mount_uploader :image, ImageUploader
+
+
+  # Typus helper methods
 
   def self.issues
     joins(:issue).select('issues.title').uniq.map(&:title)

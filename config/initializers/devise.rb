@@ -237,4 +237,6 @@ Devise.setup do |config|
   # Hint: set your redirect URL to http://localhost:3000 if you want to use twitter in your development environment (create a separate Facebook app for production)
   # raise "Go register your app with developer.Facebook.com and put the app ID and app secret into your environment." if ENV["FACEBOOK_APP_ID"].nil? or ENV["FACEBOOK_APP_SECRET"].nil?
   # config.omniauth :facebook, ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_APP_SECRET"]
+
+  config.use_salt_as_remember_token = true # according to https://github.com/plataformatec/devise/wiki/How-To:-Upgrade-to-Devise-2.0
 end

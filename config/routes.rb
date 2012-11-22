@@ -10,6 +10,8 @@ Blog::Application.routes.draw do
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
                      controllers: {:registrations => "registrations"}
+  Devise.router_name = :main_app
+
   root to: 'seed#index'
 
   resources :seed, :only => [:index]
