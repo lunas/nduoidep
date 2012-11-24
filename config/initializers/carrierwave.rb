@@ -10,8 +10,8 @@ else
     config.fog_credentials = {
         :provider               => 'AWS',
         :aws_access_key_id      => ENV['AWS_ACCESS_KEY_ID'],
-        :aws_secret_access_key  => ENV['AWS_SECRET_ACCESS_KEY'],
-        :region                 => 'us-west-1'
+        :aws_secret_access_key  => ENV['AWS_SECRET_ACCESS_KEY']
+        # :region                 => 'us-west-1' #should probably be standard
     }
     config.fog_directory  = 'nguoidep'
     config.asset_host = "http://#{config.fog_directory}.s3.amazonaws.com" # make carrierwave not use SSL
