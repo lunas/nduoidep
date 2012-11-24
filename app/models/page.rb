@@ -1,6 +1,6 @@
 class Page < ActiveRecord::Base
   attr_accessible :comment, :company, :image, :page_nr, :title
-  attr_accessible :comment, :company, :image, :page_nr, :title, :as => :admin
+  attr_accessible :comment, :company, :image, :page_nr, :title, :issue_id, :as => :admin
 
   belongs_to :issue
 

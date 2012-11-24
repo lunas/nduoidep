@@ -4,4 +4,9 @@ class Issue < ActiveRecord::Base
 
   has_many :pages, :dependent => :destroy
 
+  # Typus helper methods:
+
+  def to_label
+    "#{title} (#{date.strftime("%B")} #{date.year})"
+  end
 end
