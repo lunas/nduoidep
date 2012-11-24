@@ -1,8 +1,8 @@
 Page:
   fields:
-    default: title, company, image, page_nr, comment, issue_id
-    form: title, company, image, page_nr, comment, issue_id
-    list: image_preview, company, title, page_nr, issue_id, created_at, updated_at
+    default: title, company, image, page_nr, comment, issue
+    form: title, company, image, page_nr, comment, issue
+    list: image_preview, company, title, page_nr, issue, created_at, updated_at
     options:
       templates:
         image: carrierwave
