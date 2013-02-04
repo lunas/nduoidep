@@ -1,12 +1,13 @@
 Page:
   fields:
-    default: title, company, image, page_nr, comment, issue
-    form: title, company, image, page_nr, comment, issue
-    list: image_preview, company, title, page_nr, issue, created_at, updated_at
+    default: title, image, companies, page_nr, comment, issue
+    form: title, image, companies, page_nr, comment, issue
+    list: image_preview, companies, title, page_nr, issue, created_at, updated_at
     options:
       templates:
         image: carrierwave
+        companies: company_select
   relationships: issue
   application: Application
   filters: issue, page_nr
-  search: title, company, page_nr, comment
+  search: title, page_nr, comment

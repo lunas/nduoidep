@@ -4,3 +4,4 @@ admin:
   User: create, read, update, delete
   Issue: create, read, update, delete
   Page: create, read, update, delete
+  Company: create, read, update, delete

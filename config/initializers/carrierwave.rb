@@ -5,7 +5,7 @@ if Rails.env.test? or Rails.env.development?
   end
 else
   CarrierWave.configure do |config|
-    raise "Make sure you put your AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY into your environment." if ENV["AWS_ACCESS_KEY_ID"].nil? or ENV["AWS_SECRET_ACCESS_KEY"].nil?
+    #raise "Make sure you put your AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY into your environment." if ENV["AWS_ACCESS_KEY_ID"].nil? or ENV["AWS_SECRET_ACCESS_KEY"].nil?
     config.storage = :fog
     config.fog_credentials = {
         :provider               => 'AWS',

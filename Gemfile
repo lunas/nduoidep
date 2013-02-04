@@ -1,3 +1,4 @@
+
 source 'https://rubygems.org'
 
 gem 'rails' #, '3.2.6'
@@ -12,7 +13,6 @@ gem 'ffaker'
 gem "html_truncator", "~>0.2"
 gem 'sanitize'
 gem 'awesome_print'
-gem 'state_machine'
 gem 'simple_form'
 gem 'typus'
 gem 'cancan'
@@ -25,7 +25,6 @@ gem 'ruby_parser'
 gem 'carrierwave'
 gem "fog", "~> 1.3.1"
 
-gem 'acts_as_api'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -34,6 +33,7 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'compass-rails'
+  #gem "select2-rails"
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -69,8 +69,7 @@ group :production do
 end
 
 # Background workers talking to redis server
-#
-gem 'resque', :require => 'resque/server'
+# gem 'resque', :require => 'resque/server'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

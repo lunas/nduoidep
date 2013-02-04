@@ -20,13 +20,13 @@ Blog::Application.routes.draw do
   match :edit, to: 'seed#edit'  # just an example route to demonstrate cancan's authorization!
 
 
-  resque_constraint = lambda do |request|
-    request.env['warden'].authenticate? and request.env['warden'].user.role? :admin
-  end
+  #resque_constraint = lambda do |request|
+  #  request.env['warden'].authenticate? and request.env['warden'].user.role? :admin
+  #end
 
-  constraints resque_constraint do
-    mount Resque::Server, :at => "/admin/jobs"
-  end
+  #constraints resque_constraint do
+  #  mount Resque::Server, :at => "/admin/jobs"
+  #end
 
   namespace :admin do
     resources :users
@@ -34,6 +34,8 @@ Blog::Application.routes.draw do
     resources :issues do
       resources :pages
     end
+
+    resources :companies
   end
 
   #get :admin, to: "admin/authentications#index"

@@ -1,0 +1,9 @@
+Company:
+  fields:
+    default: name
+    form: name
+    #list: title, date, created_at, updated_at
+  relationships: ads, pages
+  application: Application
+  #filters: date
+  search: name

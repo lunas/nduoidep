@@ -1,0 +1,30 @@
+
+%li{ id: attribute_id }
+  = form.label :company_tokens#, label_text.html_safe
+  = form.text_field :company_tokens, options.merge(:class => 'text')
+
+-#:javascript
+-#  $(document).ready(function () {
+-#    $("input#page_company_tokens").select2({
+-#      placeholder: "Select one or more companies",
+-#      minimumInputLength: 1,
+-#      ajax: {
+-#        url: "/admin/companies.json",
+-#        dataType: 'jsonp',
+-#        data: function (term, page) {
+-#          return {
+-#            q: term,
+-#            page_limit: 10
+-#          }
+-#       }
+-#      }
+-#    })
+//  });
+
+
+-#.field
+-#  = f.label :name
+-#  = f.text_field :name
+-#.field
+-#  f.label :company_ids, "Companies"
+-#  f.collection_select :company_ids, Company.order(:name), :id, :name, {}, {multiple:true}

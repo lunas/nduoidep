@@ -1,4 +1,4 @@
-require "resque/tasks"
+#require "resque/tasks"
 
 # Make sure redis server is installed on localhost:
 # brew install redis
@@ -11,4 +11,4 @@ require "resque/tasks"
 # This will load up the entire rails environment so we have access to all
 # rails models.  This can be slow, so if a task doesn't require rails,
 # comment this out and do something custom here.
-task "resque:setup" => :environment
+#task "resque:setup" => :environment
