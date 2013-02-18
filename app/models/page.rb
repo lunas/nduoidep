@@ -15,6 +15,9 @@ class Page < ActiveRecord::Base
   def company_tokens=(ids)
     self.company_ids = ids.split(",")
   end
+  def company_tokens
+    self.company_ids
+  end
 
   def self.issues
     joins(:issue).select('issues.title').uniq.map(&:title)

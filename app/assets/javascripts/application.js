@@ -10,9 +10,12 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
 //= require jquery_ujs
-//= require jquery.tokeninput
-//= require_tree .
+//= require typus/jquery
+//= jquery.tokeninput.js
+
+
+//xxx = require typus/jquery
+//xx= require_tree .
 
 

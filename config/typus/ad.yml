@@ -1,0 +1,8 @@
+# Use the README file as a reference to customize settings.
+
+Ad:
+  fields:
+    default: page_id, company_id
+    form: page_id, company_id
+  relationships: 
+  application: Application

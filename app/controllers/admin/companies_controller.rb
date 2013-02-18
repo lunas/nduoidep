@@ -1,10 +1,13 @@
 class Admin::CompaniesController < Admin::ResourcesController
 
-  def xxxindex
-    @companies = Company.order(:name)
+  def index
     respond_to do |format|
-      format.html
-      format.json { render json: @companies.where("name like ?", "%#{params[:q]}%") }
+      format.html { super }
+      format.json do
+        @companies = Company.order(:name)
+        render json: @companies.where("name like ?", "%#{params[:q]}%")
+                               .as_json( only: [:id, :name] )
+      end
     end
   end
 
