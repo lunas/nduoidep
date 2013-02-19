@@ -11,11 +11,5 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery_ujs
-//= require typus/jquery
-//= jquery.tokeninput.js
-
-
-//xxx = require typus/jquery
-//xx= require_tree .
 
 
