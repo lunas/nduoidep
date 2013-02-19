@@ -2,7 +2,12 @@
 
 Ad:
   fields:
-    default: page_id, company_id
+    default: page, company, created_at, updated_at
+    list: company, page, created_at, updated_at
     form: page_id, company_id
-  relationships: 
+  relationships: company, issue, page
   application: Application
+  filters: company, issue
+  #search: company, page
+
+

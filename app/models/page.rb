@@ -30,4 +30,7 @@ class Page < ActiveRecord::Base
       "<img src=\"#{self.image}\" width=\"100\" />".html_safe
     end
   end
+  def to_label
+    "#{issue.title} - #{page_nr}"
+  end
 end

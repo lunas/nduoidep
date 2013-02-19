@@ -31,5 +31,4 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html
 nguoidep_development.*
-db/seeds/1_users.rb
 
