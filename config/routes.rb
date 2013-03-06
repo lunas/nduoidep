@@ -21,7 +21,7 @@ Blog::Application.routes.draw do
   Devise.router_name = :main_app
 
 
-  root to: 'issues#index'
+  root to: 'issues#show'
 
   #resque_constraint = lambda do |request|
   #  request.env['warden'].authenticate? and request.env['warden'].user.role? :admin

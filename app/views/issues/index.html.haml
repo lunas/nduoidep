@@ -5,17 +5,44 @@
     %th Title
     %th Date
     %th
-    %th
-    %th
 
   - @issues.each do |issue|
     %tr
       %td= issue.title
       %td= issue.date
       %td= link_to 'Show', issue
-      %td= link_to 'Edit', edit_issue_path(issue)
-      %td= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' }
 
-%br
 
-= link_to 'New Issue', new_issue_path
+#magazine
+  %div{:style => "background-image:url(/assets/page_pics/01.jpg);"}
+  %div{:style => "background-image:url(/assets/page_pics/02.jpg);"}
+  %div{:style => "background-image:url(/assets/page_pics/03.jpg);"}
+  %div{:style => "background-image:url(/assets/page_pics/04.jpg);"}
+  %div{:style => "background-image:url(/assets/page_pics/05.jpg);"}
+  %div{:style => "background-image:url(/assets/page_pics/06.jpg);"}
+</div>
+
+
+:javascript
+  $(window).ready(function() {
+    $('#magazine').turn({
+      display: 'double',
+      acceleration: true,
+      gradients: !$.isTouch,
+      elevation:50,
+      when: {
+        turned: function(e, page) {
+          console.log('Current view: ', $(this).turn('view'));
+        }
+      }
+    });
+  });
+
+  $(window).bind('keydown', function(e){
+
+    if (e.keyCode==37)
+      $('#magazine').turn('previous');
+    else if (e.keyCode==39)
+      $('#magazine').turn('next');
+
+  });

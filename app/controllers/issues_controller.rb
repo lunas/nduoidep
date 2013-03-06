@@ -1,4 +1,7 @@
 class IssuesController < ApplicationController
+
+  expose(:current_issue) { Issue.where(id: params[:id]).first || Issue.latest.first }
+
   # GET /issues
   # GET /issues.json
   def index
@@ -13,7 +16,7 @@ class IssuesController < ApplicationController
   # GET /issues/1
   # GET /issues/1.json
   def show
-    @issue = Issue.find(params[:id])
+    @issue = current_issue
 
     respond_to do |format|
       format.html # show.html.erb
