@@ -6,6 +6,10 @@ class Issue < ActiveRecord::Base
 
   scope :latest, order("date DESC").limit(1)
 
+  def first_pages
+    pages.order("page_nr ASC").limit(5)
+  end
+
   # Typus helper methods:
 
   def to_label

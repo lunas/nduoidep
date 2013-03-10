@@ -1,9 +1,8 @@
 Blog::Application.routes.draw do
 
-  resources :pages
-
-
-  resources :issues
+  resources :issues do
+    resources :pages
+  end
 
 
   get "registrations/edit"

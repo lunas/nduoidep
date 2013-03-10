@@ -1,8 +1,11 @@
 class PagesController < ApplicationController
-  # GET /pages
+
+  expose(:current_issue) { Issue.where(id: params[:issue_id]).first || Issue.latest.first }
+
+  # GET /issue/1/pages?page_nr=2
   # GET /pages.json
   def index
-    @pages = Page.all
+    @page = current_issue.pages.where(page_nr: params[:id]).first
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,14 +13,14 @@ class PagesController < ApplicationController
     end
   end
 
-  # GET /pages/1
-  # GET /pages/1.json
+  # GET /issues/1/pages/1
   def show
-    @page = Page.find(params[:id])
+    @page = current_issue.pages.where(page_nr: params[:id]).first
 
+    image_url = @page.present? ? @page.image : "eoi"
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @page }
+      format.json { render json: {image: image_url.to_s} }
     end
   end
 
