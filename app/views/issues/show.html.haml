@@ -1,29 +1,77 @@
 %p#notice= notice
 
-#magazine
-  - @issue.pages.each do |page|
-    %div{ :style => "background-image:url(#{page.image});" }
+%section
+  .select_issue
+    = label_tag :select_id, "Select issue:"
+    = select_tag :issue_id, options_for_select(Issue.all_issues_with_id, @issue.id)
 
-  -#%div{:style => "background-image:url(/assets/page_pics/01.jpg);"}
-  -#%div{:style => "background-image:url(/assets/page_pics/02.jpg);"}
-  -#%div{:style => "background-image:url(/assets/page_pics/03.jpg);"}
-  -#%div{:style => "background-image:url(/assets/page_pics/04.jpg);"}
-  -#%div{:style => "background-image:url(/assets/page_pics/05.jpg);"}
-  -#%div{:style => "background-image:url(/assets/page_pics/06.jpg);"}
-</div>
+  .select_page
+    = label_tag :page_nr, "Select page:"
+    = select_tag(:page_nr, options_for_select((1..@issue.pages.size).to_a) )
+
+  #companies
+    = label_tag :company_id, "Show pages with an ad for:"
+    = select_tag :company_id, options_for_select([['select a company', 0]] + @issue.companies)
+
+#magazine
+  - @issue.first_pages.each do |page|
+    %div{ :style => "background-image:url(#{page.image});" }
 
 
 :javascript
   $(window).ready(function() {
+
+    $("#issue_id").change( function(event) {
+      var issue_id = $("#issue_id option:selected").val()
+      document.location = "/issues/" + issue_id
+    })
+
+    $("#page_nr").change( function(event) {
+      var page_nr = $("#page_nr option:selected").val()
+      $("#magazine").turn("page", page_nr);
+    })
+
+    function addPage(page, book) {
+      // 	First check if the page is already in the book
+      if (!book.turn('hasPage', page)) {
+        // Create an element for this page
+        var element = $('<div />', {'class': 'page '+((page%2==0) ? 'odd' : 'even'), 'id': 'page-'+page}).html('<i class="loader"></i>');
+        var url = "/issues/#{@issue.id}/pages/" + page + ".json"
+        $.getJSON(url, function(response, status, xhr) {
+          if (status == "error") {
+            element.html('<i class="error">Error loading the next page.</i>')
+            book.turn('addPage', element, page); // add element to book
+          }
+          else if (response == "eoi") {
+            // end of magazin
+          }
+          else {
+            element.css("background-image", "url(" + response.image + ")")
+            book.turn('addPage', element, page); // add element to book
+          }
+        });
+      }
+    }
+
     $('#magazine').turn({
       display: 'double',
+      pages: "#{@issue.pages.size}",
       acceleration: true,
       gradients: !$.isTouch,
       elevation:50,
       when: {
         turned: function(e, page) {
-          console.log('Current view: ', $(this).turn('view'));
-        }
+          var current_pages = $(this).turn('view')
+          console.log('Current view: ', current_pages);
+          $("#page_nr").val(current_pages[0])
+        },
+        turning: function(e, page, view) {
+          // Gets the range of pages that the book needs right now
+          var range = $(this).turn('range', page);
+          // Check if each page is within the book
+          for (page = range[0]; page<=range[1]; page++)
+              addPage(page, $(this));
+        },
       }
     });
   });
@@ -37,11 +85,4 @@
 
   });
 
-
-%p
-  %b Title:
-  = @issue.title
-%p
-  %b Date:
-  = @issue.date
 
