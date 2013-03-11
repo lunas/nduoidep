@@ -14,7 +14,6 @@
     = select_tag :company_id, options_for_select([['select a company', 0]] + @issue.companies)
     %ul.pages
 
-
 #magazine
   - @issue.first_pages.each do |page|
     %div{ :style => "background-image:url(#{page.image});" }
@@ -60,7 +59,7 @@
     })
 
     function addPage(page, book) {
-      // 	First check if the page is already in the book
+      // check if the page is already in the book
       if (!book.turn('hasPage', page)) {
         // Create an element for this page
         var element = $('<div />', {'class': 'page '+((page%2==0) ? 'odd' : 'even'), 'id': 'page-'+page}).html('<i class="loader"></i>');
@@ -70,10 +69,7 @@
             element.html('<i class="error">Error loading the next page.</i>')
             book.turn('addPage', element, page); // add element to book
           }
-          else if (response == "eoi") {
-            // end of magazin
-          }
-          else {
+          else if (response != "eoi" /* end of magazine */ ) {
             element.css("background-image", "url(" + response.image + ")")
             book.turn('addPage', element, page); // add element to book
           }
