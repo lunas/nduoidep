@@ -1,12 +1,42 @@
 // Place all the styles related to the Issues controller here.
-// They will automatically be included in application.css.
+// They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body {
   background: #ccc;
 }
 
+#filters {
+  width: 100%;
+  height: 70%;
+  position: relative;
+  margin-bottom: 20px;
+
+  .filter {
+    display: inline-block;
+    margin-right: 40px;
+  }
+  .select_issue {
+
+  }
+  .pages li{
+    @include inline-block;
+    margin-right: 10px;
+  }
+}
+#page_nr_left {
+  position: absolute;
+  top: 0px;
+  left: -50px;
+}
+#page_nr_right {
+  position: absolute;
+  top: 0px;
+  right: -50px;
+}
+
 #magazine {
+  position: absolute;
   width: 1152px;
   height: 752px;
   .turn-page {

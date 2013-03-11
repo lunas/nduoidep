@@ -1,23 +1,25 @@
 %p#notice= notice
 
-%section
-  .select_issue
+%section#filters
+  .select_issue.filter
     = label_tag :select_id, "Select issue:"
     = select_tag :issue_id, options_for_select(Issue.all_issues_with_id, @issue.id)
 
-  .select_page
+  .select_page.filter
     = label_tag :page_nr, "Select page:"
     = select_tag(:page_nr, options_for_select((1..@issue.pages.size).to_a) )
 
-  #companies
-    = label_tag :company_id, "Show pages with an ad for:"
+  #companies.filter
+    = label_tag :company_id, "Or show pages with an ad for:"
     = select_tag :company_id, options_for_select([['select a company', 0]] + @issue.companies)
-    %ul.pages
+    %ul.pages.filter
+
 
 #magazine
   - @issue.first_pages.each do |page|
     %div{ :style => "background-image:url(#{page.image});" }
-
+  #page_nr_left
+  #page_nr_right
 
 :javascript
   $(window).ready(function() {
@@ -42,7 +44,7 @@
 
       var url = "/issues/#{@issue.id}/pages?company_id=" + company_id
       $.getJSON(url, function(response, status, xhr) {
-
+        pages_list.empty()
         if (status=="success") {
           $.each(response.pages, function(key, val) {
             pages_list.append('<li><a href="#">' + val + '<a/></li>')
@@ -87,7 +89,11 @@
         turned: function(e, page) {
           var current_pages = $(this).turn('view')
           console.log('Current view: ', current_pages);
-          $("#page_nr").val(current_pages[0])
+          var left_page = current_pages[0]
+          var right_page = current_pages[1]
+          $("#page_nr").val()
+          $("#page_nr_left").text(current_pages[0])
+          $("#page_nr_right").text(current_pages[1])
         },
         turning: function(e, page, view) {
           // Gets the range of pages that the book needs right now
@@ -106,7 +112,6 @@
       $('#magazine').turn('previous');
     else if (e.keyCode==39)
       $('#magazine').turn('next');
-
   });
 
 

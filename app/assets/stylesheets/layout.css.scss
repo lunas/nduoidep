@@ -1,5 +1,5 @@
 html, body {
-  background-color: #4B7399;
+  background-color: white;
   font-family: Verdana, Helvetica, Arial;
   font-size: 14px;
 }
@@ -19,13 +19,15 @@ a {
 }
 
 #container {
+  @include container;
   width: 80%;
   margin: 0 auto;
-  background-color: #FFF;
+  background-color: yellow;
   padding: 20px 40px;
-  border: solid 1px black;
-  margin-top: 20px;
+  //border: solid 1px black;
+  margin-top: 0px;
 }
+
 
 #flash_notice, #flash_error, #flash_alert {
   padding: 5px 8px;

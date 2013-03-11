@@ -32,7 +32,7 @@ class Issue < ActiveRecord::Base
   def pages_for_company(company_id)
     pages.joins(:ads)
          .where("ads.company_id=#{company_id}")
-         .order(:page_nr)
+         .order("page_nr DESC")
          .uniq.pluck(:page_nr)
   end
 
