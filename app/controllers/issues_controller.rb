@@ -2,6 +2,11 @@ class IssuesController < ApplicationController
 
   expose(:current_issue) { Issue.where(id: params[:id]).first || Issue.latest.first }
 
+  def company_pages
+    company_pages = company_id.present? ? current_issue.company_pages(company_id) : []
+    render json: {pages: company_pages}
+  end
+
   # GET /issues
   # GET /issues.json
   def index

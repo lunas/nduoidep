@@ -12,6 +12,8 @@
   #companies
     = label_tag :company_id, "Show pages with an ad for:"
     = select_tag :company_id, options_for_select([['select a company', 0]] + @issue.companies)
+    %ul.pages
+
 
 #magazine
   - @issue.first_pages.each do |page|
@@ -29,6 +31,32 @@
     $("#page_nr").change( function(event) {
       var page_nr = $("#page_nr option:selected").val()
       $("#magazine").turn("page", page_nr);
+    })
+
+    $("#company_id").change( function(event) {
+      var company_id = $("#company_id option:selected").val()
+      var pages_list = $("#companies ul.pages")
+      if (company_id == 0) {
+        pages_list.empty()
+        return
+      }
+
+      var url = "/issues/#{@issue.id}/pages?company_id=" + company_id
+      $.getJSON(url, function(response, status, xhr) {
+
+        if (status=="success") {
+          $.each(response.pages, function(key, val) {
+            pages_list.append('<li><a href="#">' + val + '<a/></li>')
+          })
+          pages_list.find('li a').click( function(event){
+            var page_nr = $(this).text()
+            $("#magazine").turn("page", page_nr);
+          })
+        }
+        else {
+          pages_list.append('<li>error retrieving pages</li>')
+        }
+      })
     })
 
     function addPage(page, book) {

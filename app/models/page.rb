@@ -9,7 +9,6 @@ class Page < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
-
   # Typus helper methods
 
   def company_tokens=(ids)

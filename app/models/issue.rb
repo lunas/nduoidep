@@ -29,6 +29,15 @@ class Issue < ActiveRecord::Base
          .map{|c| [c.name, c.id] }
   end
 
+  def pages_for_company(company_id)
+    pages.joins(:ads)
+         .where("ads.company_id=#{company_id}")
+         .order(:page_nr)
+         .uniq.pluck(:page_nr)
+  end
+
+
+
 
   # Typus helper methods:
 
