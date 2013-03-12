@@ -21,6 +21,8 @@ Blog::Application.routes.draw do
 
 
   root to: 'home#index'
+  get "/contact",     to: "home#contact"
+  get "/advertising", to: "home#advertising"
 
   #resque_constraint = lambda do |request|
   #  request.env['warden'].authenticate? and request.env['warden'].user.role? :admin

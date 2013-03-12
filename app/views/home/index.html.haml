@@ -1,2 +1,32 @@
-%h1 Welcome to Nguoi Dep Magazine, Inc.
+%header.home
+  .box
+    %p Welcome to
+    %h1 Nguoi Dep Magazine, Inc.
 
+%section.home
+  .menu
+    .box
+      %p.viet= link_to 'Quyen Moi Nat',         issue_path(Issue.latest.first)
+      %p.engl= link_to 'Latest Magazine Issue', issue_path(Issue.latest.first)
+    .box
+      %p.viet= link_to 'Lien Lac', "/contact"
+      %p.engl= link_to 'Contact', "/contact"
+    .box
+      %p.viet= link_to 'Dang Quang Cao', "advertising"
+      %p.engl= link_to 'Advertising Information', "advertising"
+
+  .content
+    .box
+      %p.viet
+        vietnamese vietnamese vietnamese vietnamese vietnamese vietnamese
+        vietnamese vietnamese vietnamese vietnamese vietnamese vietnamese
+        vietnamese vietnamese vietnamese vietnamese vietnamese vietnamese
+        vietnamese vietnamese vietnamese vietnamese vietnamese vietnamese
+        vietnamese vietnamese vietnamese vietnamese vietnamese vietnamese
+        vietnamese vietnamese vietnamese vietnamese vietnamese vietnamese
+      %p.engl
+        english english english english english english english english
+        english english english english english english english english
+        english english english english english english english english
+        english english english english english english english english
+        english english english english english english english english
