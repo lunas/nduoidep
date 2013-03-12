@@ -1,6 +1,9 @@
 %p#notice= notice
 
+
 %section#filters
+  .home= link_to 'Nguoi Dep', root_path
+
   .select_issue.filter
     = label_tag :select_id, "Select issue:"
     = select_tag :issue_id, options_for_select(Issue.all_issues_with_id, @issue.id)
@@ -14,12 +17,12 @@
     = select_tag :company_id, options_for_select([['select a company', 0]] + @issue.companies)
     %ul.pages.filter
 
-
-#magazine
-  - @issue.first_pages.each do |page|
-    %div{ :style => "background-image:url(#{page.image});" }
-  #page_nr_left
-  #page_nr_right
+#magazine_container
+  #magazine
+    - @issue.first_pages.each do |page|
+      %div{ :style => "background-image:url(#{page.image});" }
+  .page_nr_left.page_nr
+  .page_nr_right.page_nr
 
 :javascript
   $(window).ready(function() {
@@ -92,8 +95,11 @@
           var left_page = current_pages[0]
           var right_page = current_pages[1]
           $("#page_nr").val()
-          $("#page_nr_left").text(current_pages[0])
-          $("#page_nr_right").text(current_pages[1])
+          if (left_page > 0)
+            $(".page_nr_left").text(left_page).show()
+          else
+            $(".page_nr_left").hide()
+          $(".page_nr_right").text(current_pages[1])
         },
         turning: function(e, page, view) {
           // Gets the range of pages that the book needs right now

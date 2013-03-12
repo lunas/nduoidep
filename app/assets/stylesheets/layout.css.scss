@@ -1,15 +1,19 @@
 html, body {
   background-color: white;
   font-family: Verdana, Helvetica, Arial;
-  font-size: 14px;
+  font-size: 90%;
 }
 
 a img {
   border: none;
 }
 
-a {
-  color: #0000FF;
+a, a:visited {
+  color: black;
+}
+a:hover, a:active, a:focus {
+  color: yellow;
+  background-color: black;
 }
 
 .clear {
