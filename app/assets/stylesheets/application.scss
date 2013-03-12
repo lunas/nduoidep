@@ -23,9 +23,9 @@
 @import "blueprint";
 @import "compass/typography/links/link-colors";
 @import "compass/typography/links/hover-link";
+@import "layout";
 @import "issues";
 @import "home";
-@import "layout";
 @import "pages";
 
 $blueprint-grid-columns : 24;

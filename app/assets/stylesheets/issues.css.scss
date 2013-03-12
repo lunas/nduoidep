@@ -2,6 +2,9 @@
 // They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "compass/typography/links/hover-link";
+@import "compass/css3/inline-block";
+
 #filters {
   width: 100%;
   height: 70%;
