@@ -1,32 +1,36 @@
 %header.home
+  #image_box
+    =image_tag 'liberty.jpg'
   .box
     %p Welcome to
-    %h1 Nguoi Dep Magazine, Inc.
+    %h1 Người Đẹp Magazine, Inc.
 
 %section.home
   .menu
     .box
-      %p.viet= link_to 'Quyen Moi Nat',         issue_path(Issue.latest.first)
+      %p.viet= link_to 'Quyển Mới Nhất',         issue_path(Issue.latest.first)
       %p.engl= link_to 'Latest Magazine Issue', issue_path(Issue.latest.first)
     .box
-      %p.viet= link_to 'Lien Lac', "/contact"
+      %p.viet= link_to 'Liên Lạc', "/contact"
       %p.engl= link_to 'Contact', "/contact"
     .box
-      %p.viet= link_to 'Dang Quang Cao', "advertising"
+      %p.viet= link_to 'Đăng Quảng Cáo', "advertising"
       %p.engl= link_to 'Advertising Information', "advertising"
 
   .content
     .box
       %p.viet
-        vietnamese vietnamese vietnamese vietnamese vietnamese vietnamese
-        vietnamese vietnamese vietnamese vietnamese vietnamese vietnamese
-        vietnamese vietnamese vietnamese vietnamese vietnamese vietnamese
-        vietnamese vietnamese vietnamese vietnamese vietnamese vietnamese
-        vietnamese vietnamese vietnamese vietnamese vietnamese vietnamese
-        vietnamese vietnamese vietnamese vietnamese vietnamese vietnamese
+        Người Đẹp Magazine, thành lập từ năm 1999, là Việt báo tháng phát
+        hành miễn phí tổng cộng 4,500 cuốn trong tiểu bang New York,
+        New Jersey, và Connecticut, có những bài vở đặc biệt của mỗi tháng,
+        tin tức vòng quanh thế giới, bài vở về gia đình con cái và tình
+        yêu hạnh phúc, thế giới nghệ sĩ/ người đẹp/ thời trang, truyện
+        ngắn/ truyện dài, di trú, tử vi, tìm bạn bốn phương...
+
       %p.engl
-        english english english english english english english english
-        english english english english english english english english
-        english english english english english english english english
-        english english english english english english english english
-        english english english english english english english english
+        Nguoi Dep Magazine is a monthly Vietnamese magazine, established
+        since 1999, with total of 4,500 issues for FREE distribution in
+        New York, New Jersey, & Connecticut, covered important stories/articles
+        and news around the world, articles on family & education and tips,
+        stars/models/fashions, short & long stories, immigration,
+        horoscope, section finding a friend...
