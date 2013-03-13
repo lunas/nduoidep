@@ -1,4 +1,8 @@
 ---
+NguoiDepBackground500x600.jpg: NguoiDepBackground500x600-5594e65527a3e0812384ac660e6ae05a.jpg
+NguoiDepBackground500x600/index.jpg: NguoiDepBackground500x600-5594e65527a3e0812384ac660e6ae05a.jpg
+liberty.jpg: liberty-2dd07a411123c8269f8ee6dd12ddfaf4.jpg
+liberty/index.jpg: liberty-2dd07a411123c8269f8ee6dd12ddfaf4.jpg
 page_pics/01.jpg: page_pics/01-2247ee1f04f6ea439462eddc9d3edf3f.jpg
 page_pics/01/index.jpg: page_pics/01-2247ee1f04f6ea439462eddc9d3edf3f.jpg
 page_pics/02.jpg: page_pics/02-e1e246e50e6666328bf309aad7fa81c9.jpg
@@ -33,16 +37,16 @@ typus/jquery.tokeninput.js: typus/jquery.tokeninput-9b8844cef73abe35eb77db2d9635
 typus/jquery/index.tokeninput.js: typus/jquery.tokeninput-9b8844cef73abe35eb77db2d9635f629.js
 admin.css: admin-82f69d8ba9dccf0c4c0172b0b7636d91.css
 admin/index.css: admin-82f69d8ba9dccf0c4c0172b0b7636d91.css
-application.css: application-aa5c9edc2e2f66f2c493fd18ef678a52.css
-application/index.css: application-aa5c9edc2e2f66f2c493fd18ef678a52.css
-home.css: home-fc3bf1b548158d19b239cdee2d9e5001.css
-home/index.css: home-fc3bf1b548158d19b239cdee2d9e5001.css
+application.css: application-74e9707161c7669eff24b5ee9a244bec.css
+application/index.css: application-74e9707161c7669eff24b5ee9a244bec.css
+home.css: home-e3c0a52789b7f1f787450a0653a0eedc.css
+home/index.css: home-e3c0a52789b7f1f787450a0653a0eedc.css
 ie.css: ie-2ee0c3b28d0fd1f174147d5676105232.css
 ie/index.css: ie-2ee0c3b28d0fd1f174147d5676105232.css
-issues.css: issues-e21122d27089cee5eb16efab132e03b8.css
-issues/index.css: issues-e21122d27089cee5eb16efab132e03b8.css
-layout.css: layout-75cf7eb8eee00a1d11f084264024dbb4.css
-layout/index.css: layout-75cf7eb8eee00a1d11f084264024dbb4.css
+issues.css: issues-e47eed050f8080efb26274347125354d.css
+issues/index.css: issues-e47eed050f8080efb26274347125354d.css
+layout.css: layout-87b9ba96dccad7f36fbcaff8ae27132e.css
+layout/index.css: layout-87b9ba96dccad7f36fbcaff8ae27132e.css
 omniauth_callbacks.css: omniauth_callbacks-2ee0c3b28d0fd1f174147d5676105232.css
 omniauth_callbacks/index.css: omniauth_callbacks-2ee0c3b28d0fd1f174147d5676105232.css
 pages.css: pages-2ee0c3b28d0fd1f174147d5676105232.css
