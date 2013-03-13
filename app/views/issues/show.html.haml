@@ -99,6 +99,11 @@
             $(".page_nr_left").text(left_page).show()
           else
             $(".page_nr_left").hide()
+          if (right_page > 0)
+            $(".page_nr_right").text(right_page).show()
+          else
+            $(".page_nr_right").hide()
+
           $(".page_nr_right").text(current_pages[1])
         },
         turning: function(e, page, view) {

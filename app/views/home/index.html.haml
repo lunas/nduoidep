@@ -1,15 +1,18 @@
 %header.home
-  #image_box
+  #left_image_box
     =image_tag 'liberty.jpg'
   .box
     %p Welcome to
     %h1 Người Đẹp Magazine, Inc.
 
+#right_image_box
+  =image_tag 'NguoiDepBackground500x600.jpg'
+
 %section.home
   .menu
     .box
-      %p.viet= link_to 'Quyển Mới Nhất',         issue_path(Issue.latest.first)
-      %p.engl= link_to 'Latest Magazine Issue', issue_path(Issue.latest.first)
+      %p.viet= link_to 'Tạp Chí',         issue_path(Issue.latest.first)
+      %p.engl= link_to 'Magazine Issues', issue_path(Issue.latest.first)
     .box
       %p.viet= link_to 'Liên Lạc', "/contact"
       %p.engl= link_to 'Contact', "/contact"

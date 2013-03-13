@@ -28,11 +28,9 @@ a:hover, a:active, a:focus {
   @include container;
   position: absolute;
   width: 1100px;
-  //height: 100%;
   margin: 0 auto;
-  background-color: yellow;
+  background-color: #ffff00;
   padding: 20px 40px;
-  //border: solid 1px black;
   margin-top: 0px;
 }
 
