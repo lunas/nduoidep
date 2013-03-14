@@ -1,11 +1,8 @@
 Blog::Application.routes.draw do
 
-  resources :issues do
-    resources :pages
+  resources :issues, only: [:show], constraints: {id: /[0-9]+/} do
+    resources :pages, only: [:index, :show], constraints: {id: /[0-9]+/}
   end
-
-
-  get "registrations/edit"
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
              controllers: {
@@ -18,7 +15,6 @@ Blog::Application.routes.draw do
   #                   controllers: {:registrations => "registrations"}
 
   Devise.router_name = :main_app
-
 
   root to: 'home#index'
   get "/contact",     to: "home#contact"

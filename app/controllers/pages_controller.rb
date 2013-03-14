@@ -1,18 +1,12 @@
 class PagesController < ApplicationController
 
   expose(:current_issue) { Issue.where(id: params[:issue_id]).first || Issue.latest.first }
-  expose(:company_id)    { params[:company_id] }
+  expose(:company_id)    { (params[:company_id] =~ /^\d+$/).nil? ? nil : params[:company_id] }
 
-  # GET /issue/1/pages?page_nr=2
-  # GET /pages.json
+  # GET /issues/1/pages?company_id=2
   def index
     company_pages = company_id.present? ? current_issue.pages_for_company(company_id) : []
     render json: {pages: company_pages}
-
-    #respond_to do |format|
-    #  format.html # index.html.erb
-    #  format.json { render json: @pages }
-    #end
   end
 
   # GET /issues/1/pages/1
