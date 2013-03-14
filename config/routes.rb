@@ -1,7 +1,9 @@
 Blog::Application.routes.draw do
 
   resources :issues, only: [:show], constraints: {id: /[0-9]+/} do
-    resources :pages, only: [:index, :show], constraints: {id: /[0-9]+/}
+    scope :format => true, :constraints => { :format => 'json' } do
+      resources :pages, only: [:index, :show], constraints: {id: /[0-9]+/}
+    end
   end
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},

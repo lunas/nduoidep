@@ -15,7 +15,7 @@
   #companies.filter
     = label_tag :company_id, "Or show pages with an ad for:"
     = select_tag :company_id, options_for_select([['select a company', 0]] + @issue.companies)
-    %ul.pages.filter
+    %ul.pages
 
 #magazine_container
   #magazine
@@ -45,7 +45,7 @@
         return
       }
 
-      var url = "/issues/#{@issue.id}/pages?company_id=" + company_id
+      var url = "/issues/#{@issue.id}/pages.json?company_id=" + company_id
       $.getJSON(url, function(response, status, xhr) {
         pages_list.empty()
         if (status=="success") {

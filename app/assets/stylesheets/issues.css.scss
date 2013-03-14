@@ -10,31 +10,32 @@
   position: relative;
   margin-bottom: 20px;
   margin-left: -40px;
+}
 
-  .home {
-    display: inline-block;
-    background-color: black;
+.home {
+  display: inline-block;
+  background-color: black;
+  color: yellow;
+  font-size: 2em;
+  padding: 5px 40px 5px 20px;
+
+  a {
     color: yellow;
-    font-size: 2em;
-    padding: 5px 20px 5px 20px;
-
-    a {
-      color: yellow;
-      @include hover-link;
-    }
-  }
-
-  .filter {
-    display: inline-block;
-    margin-right: 40px;
-  }
-  .select_issue {
-  }
-  .pages li{
-    @include inline-block;
-    margin-right: 10px;
+    @include hover-link;
   }
 }
+.filter {
+  width: 100%;
+  display: inline-block;
+  margin-right: 20px;
+}
+.select_issue {
+}
+.pages li{
+  @include inline-block;
+  margin-right: 10px;
+}
+
 #magazine_container {
   position: relative;
   width: 1040px;
