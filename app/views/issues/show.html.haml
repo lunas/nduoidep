@@ -20,9 +20,12 @@
 #magazine_container
   #magazine
     - @issue.first_pages.each do |page|
-      %div{ :style => "background-image:url(#{page.image});" }
+      %div{ :style => "background-image:url(#{page.image});", :class => "hard" }
+
   .page_nr_left.page_nr
+  .turn_page.turn_page_left= link_to "<"
   .page_nr_right.page_nr
+  .turn_page.turn_page_right= link_to ">"
 
 :javascript
   $(window).ready(function() {
@@ -35,6 +38,7 @@
     $("#page_nr").change( function(event) {
       var page_nr = $("#page_nr option:selected").val()
       $("#magazine").turn("page", page_nr);
+      return false
     })
 
     $("#company_id").change( function(event) {
@@ -62,6 +66,15 @@
         }
       })
     })
+
+    $(".turn_page_left").click(function(e){
+      $("#magazine").turn("previous")
+      return false
+    })
+     $(".turn_page_right").click(function(e){
+       $("#magazine").turn("next")
+       return false
+     })
 
     function addPage(page, book) {
       // check if the page is already in the book
@@ -95,14 +108,23 @@
           var left_page = current_pages[0]
           var right_page = current_pages[1]
           $("#page_nr").val()
-          if (left_page > 0)
+          if (left_page > 0){
             $(".page_nr_left").text(left_page).show()
-          else
+            $(".turn_page_left").show()
+          }
+          else {
             $(".page_nr_left").hide()
+            $(".turn_page_left").hide()
+          }
           if (right_page > 0)
             $(".page_nr_right").text(right_page).show()
           else
             $(".page_nr_right").hide()
+          var last_page = $(this).turn("pages")
+          if (left_page == last_page || right_page == last_page)
+            $(".turn_page_right").hide();
+          else
+            $(".turn_page_right").show();
 
           $(".page_nr_right").text(current_pages[1])
         },

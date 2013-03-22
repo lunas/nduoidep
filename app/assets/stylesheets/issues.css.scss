@@ -48,11 +48,30 @@
   padding: 5px;
 }
 .page_nr_left {
-    left: -30px;
+    left: -20px;
 }
 .page_nr_right {
-    right: -30px;
+    right: -25px;
 }
+.turn_page {
+  position: absolute;
+  top: 300px;
+  font-size: 30px;
+  font-weight: bolder;
+
+  a {
+    text-decoration: none;
+    border: 1px solid black;
+    padding: 3px;
+  }
+}
+.turn_page_left {
+  left: -40px;
+}
+.turn_page_right {
+  right: -40px;
+}
+
 
 #magazine {
   position: absolute;
