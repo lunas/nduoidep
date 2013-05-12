@@ -100,13 +100,13 @@
   .close{
     position: fixed;
     margin: 13px 5px 0 0;
-    background-color: grey;
 
     a, a:hover, a:visited, a:active, a:focus  {
       font-weight:bold;
       color: yellow;
       background-color: black;
       padding: 5px;
+      border: 1px solid yellow;
     }
   }
 }
