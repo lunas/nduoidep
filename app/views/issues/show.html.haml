@@ -112,9 +112,9 @@
             $(".turn_page_right").show();
 
           $(".page_nr_right").text(current_pages[1])
-          corner_clicked = false;
         },
         turning: function(e, page, view) {
+          console.log('turning')
           zoom_off();
           // Gets the range of pages that the book needs right now
           var range = $(this).turn('range', page);
@@ -133,15 +133,35 @@
       $('#magazine').turn('next');
   });
 
-  var corner_clicked = false;
-
-  $("#magazine").bind("start", function(event, pageObject, corner) {
-      corner_clicked = true;
-  });
+  var page_corner = new function(){
+    this.magazine_left  = $('#magazine').offset().left;
+    this.magazine_top   = $('#magazine').offset().top
+    this.magazine_width = $('#magazine').width();
+    this.magazine_height= $('#magazine').height();
+    this.triangle_width = 60;   // that's about the corner size
+    this.isActive = function(event) {
+      var position = this.getPositionRelativeToMagazine(event.pageX, event.pageY)
+      var inCorner = this.isPositionInCorner(position)
+      return inCorner;
+    };
+    this.getPositionRelativeToMagazine = function(x, y){
+      return {left: x - this.magazine_left,
+              top:  y - this.magazine_top}
+    }
+    this.isPositionInCorner = function(pos){
+      var maxTop = maxLeft = this.triangle_width;
+      var maxRight = this.magazine_width - this.triangle_width;
+      var maxBottom = this.magazine_height - this.triangle_width;
+      return (pos.left < maxLeft && pos.top < maxTop)    ||    // top left
+             (pos.left > maxRight && pos.top < maxTop)   ||    // top right
+             (pos.left < maxLeft && pos.top > maxBottom) ||    // bottom left
+             (pos.left > maxRight && pos.top > maxBottom)         // bottom right
+    }
+  }
 
   $('#magazine').on('click', '.turn-page-wrapper', function(e) {
-     console.log('corner_clicked is ' + corner_clicked);
-     if (corner_clicked) {
+     console.log('turn-page-wrapper click: page_corner.isActive(e): ' + page_corner.isActive(e));
+     if (page_corner.isActive(e)) {
        e.stopImmediatePropagation();
        return;
      }
@@ -168,7 +188,6 @@
 
   function zoom_off() {
     $('#zoomer').hide();
-    corner_clicked = false;
     return $('#magazine').show();
   };
 
@@ -178,13 +197,14 @@
     return false;
   })
 
-  $('#magazine').mouseover(function(){
-    if (corner_clicked){
+  $('#magazine').mouseover(function(e){
+    if (page_corner.isActive(e)){
+      $('#magazine').removeClass('zoom_in');
       return;
     }
     $('#magazine').addClass('zoom_in');
   })
   .mouseout(function(){
     $('#magazine').removeClass('zoom_in');
-    corner_clicked = false;
   })
+
