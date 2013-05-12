@@ -83,3 +83,30 @@
     background-size: 100% 100%;
   }
 }
+
+.zoom_in {
+  cursor: url('zoom_in.png'), auto;
+}
+
+#zoomer {
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: grey;
+
+
+  .close{
+    position: fixed;
+    margin: 13px 5px 0 0;
+    background-color: grey;
+
+    a, a:hover, a:visited, a:active, a:focus  {
+      font-weight:bold;
+      color: yellow;
+      background-color: black;
+      padding: 5px;
+    }
+  }
+}

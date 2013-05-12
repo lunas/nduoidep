@@ -12,4 +12,5 @@
 //
 //= require jquery
 //= require turn
+//= require issues
 

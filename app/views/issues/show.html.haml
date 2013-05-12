@@ -27,19 +27,13 @@
   .page_nr_right.page_nr
   .turn_page.turn_page_right= link_to ">"
 
+  #zoomer
+    %img
+    .close
+      = link_to 'close', class: 'button'
+
 :javascript
   $(window).ready(function() {
-
-    $("#issue_id").change( function(event) {
-      var issue_id = $("#issue_id option:selected").val()
-      document.location = "/issues/" + issue_id
-    })
-
-    $("#page_nr").change( function(event) {
-      var page_nr = $("#page_nr option:selected").val()
-      $("#magazine").turn("page", page_nr);
-      return false
-    })
 
     $("#company_id").change( function(event) {
       var company_id = $("#company_id option:selected").val()
@@ -66,15 +60,6 @@
         }
       })
     })
-
-    $(".turn_page_left").click(function(e){
-      $("#magazine").turn("previous")
-      return false
-    })
-     $(".turn_page_right").click(function(e){
-       $("#magazine").turn("next")
-       return false
-     })
 
     function addPage(page, book) {
       // check if the page is already in the book
@@ -127,8 +112,10 @@
             $(".turn_page_right").show();
 
           $(".page_nr_right").text(current_pages[1])
+          corner_clicked = false;
         },
         turning: function(e, page, view) {
+          zoom_off();
           // Gets the range of pages that the book needs right now
           var range = $(this).turn('range', page);
           // Check if each page is within the book
@@ -140,11 +127,64 @@
   });
 
   $(window).bind('keydown', function(e){
-
     if (e.keyCode==37)
       $('#magazine').turn('previous');
     else if (e.keyCode==39)
       $('#magazine').turn('next');
   });
 
+  var corner_clicked = false;
 
+  $("#magazine").bind("start", function(event, pageObject, corner) {
+      corner_clicked = true;
+  });
+
+  $('#magazine').on('click', '.turn-page-wrapper', function(e) {
+     console.log('corner_clicked is ' + corner_clicked);
+     if (corner_clicked) {
+       e.stopImmediatePropagation();
+       return;
+     }
+     var src, url;
+     var url = $(this).find('.turn-page').css('background-image');
+     var src = url.replace('url(', '').replace(')', '');
+     zoom_on();
+     $('#zoomer img').attr('src', src);
+     set_position_close_div();
+   });
+
+  function set_position_close_div() {
+    var zoomer = $('#zoomer');
+    var close_div = zoomer.find('.close');
+    var top = zoomer.offset().top;
+    var left = zoomer.offset().left + zoomer.width() - close_div.width() - 20;
+    close_div.css('top', top).css('left', left);
+  }
+
+  function zoom_on() {
+    $('#magazine').hide();
+    return $('#zoomer').show();
+  };
+
+  function zoom_off() {
+    $('#zoomer').hide();
+    corner_clicked = false;
+    return $('#magazine').show();
+  };
+
+  $('#zoomer').on('click', '.close a', function(e){
+    var page_nr = $("#magazine").turn("page", page_nr);
+    zoom_off();
+    return false;
+  })
+
+  $('#magazine').mouseover(function(){
+    if (corner_clicked){
+      return;
+    }
+    $('#magazine').addClass('zoom_in');
+  })
+  .mouseout(function(){
+    $('#magazine').removeClass('zoom_in');
+    corner_clicked = false;
+  })
