@@ -1,3 +1,4 @@
+
 Blog::Application.routes.draw do
 
   resources :issues, only: [:show], constraints: {id: /[0-9]+/} do
@@ -41,5 +42,10 @@ Blog::Application.routes.draw do
   end
 
   #get :admin, to: "admin/authentications#index"
+
+  namespace :api do
+    resources :issues, constraints: {id: /[0-9]+/},    defaults: { format: 'json' }
+    resources :pages, only: [:create, :show, :update], defaults: { format: 'json' }
+  end
 
 end

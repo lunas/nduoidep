@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :issue do
-    title "MyString"
-    date "2012-11-17"
+    title "July Issue"
+    date "2012-07-14"
   end
 end
