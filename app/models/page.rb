@@ -1,5 +1,5 @@
 class Page < ActiveRecord::Base
-  attr_accessible :comment, :company_tokens, :image, :page_nr, :title
+  attr_accessible :comment, :company_tokens, :image, :page_nr, :title, :issue_id
   attr_accessible :comment, :company_tokens, :image, :page_nr, :title, :issue_id, :as => :admin
   attr_reader :company_tokens
 
