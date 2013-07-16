@@ -13,7 +13,7 @@ class PagesController < ApplicationController
   def show
     @page = current_issue.pages.where(page_nr: params[:id]).first
 
-    image_url = @page.present? ? @page.image : "eoi"
+    image_url = @page.present? ? @page.url : "eoi"
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: {image: image_url.to_s} }

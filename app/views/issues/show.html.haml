@@ -20,7 +20,7 @@
 #magazine_container
   #magazine
     - @issue.first_pages.each do |page|
-      %div{ :style => "background-image:url(#{page.image});", :class => "hard" }
+      %div{ :style => "background-image:url(#{page.url});", :class => "hard" }
 
   .page_nr_left.page_nr
   .turn_page.turn_page_left= link_to "<"

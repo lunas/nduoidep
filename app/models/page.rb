@@ -1,6 +1,6 @@
 class Page < ActiveRecord::Base
-  attr_accessible :comment, :company_tokens, :image, :page_nr, :title, :issue_id
-  attr_accessible :comment, :company_tokens, :image, :page_nr, :title, :issue_id, :as => :admin
+  attr_accessible :comment, :company_tokens, :image, :page_nr, :title, :issue_id, :url
+  attr_accessible :comment, :company_tokens, :image, :page_nr, :title, :issue_id, :url, :as => :admin
   attr_reader :company_tokens
 
   belongs_to :issue
@@ -29,7 +29,12 @@ class Page < ActiveRecord::Base
       "<img src=\"#{self.image}\" width=\"100\" />".html_safe
     end
   end
+
   def to_label
     "#{issue.title} - #{page_nr}"
+  end
+
+  def url
+    read_attribute(:url) || self.image.url
   end
 end

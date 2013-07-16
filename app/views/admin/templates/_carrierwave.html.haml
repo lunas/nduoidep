@@ -1,7 +1,10 @@
 = form.file_field attribute, options
 
 %li{id: attribute_id }
-  - if @item.send("#{attribute}?")
+  - if @item.url?
+    = render 'admin/templates/carrierwave_preview', :preview => @item.url
+
+  -# if @item.send("#{attribute}?")
     - file = @item.send(attribute)
     - if file.image?
       = render 'admin/templates/carrierwave_preview', :preview => file.url

@@ -1,6 +1,6 @@
 Page:
   fields:
-    default: title, image, companies, page_nr, comment, issue
+    default: title, url, companies, page_nr, comment, issue
     form: title, image, companies, page_nr, comment, issue
     list: image_preview, companies, title, page_nr, issue, created_at, updated_at
     options:

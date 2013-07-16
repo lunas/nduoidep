@@ -1,5 +1,7 @@
 class Api::PagesController < Api::BaseController
 
+  expose(:page) { Page.find(params[:page_id]) }
+
   expose(:new_page) {
     # We get back a string from the client when posting an page because
     # of the way the request is constructed; so parse it into JSON and
@@ -11,6 +13,8 @@ class Api::PagesController < Api::BaseController
     Issue.find(params[:page][:issue_id]).pages.build(params[:page])
   }
 
+  expose(:url) { params[:url] }
+
   def create
     accept_only_json do
       if new_page.save
@@ -18,6 +22,13 @@ class Api::PagesController < Api::BaseController
       else
         send_error_messages new_page
       end
+    end
+  end
+
+  def update
+    accept_only_json do
+      page.update_attribute( url )
+      send_ok
     end
   end
 

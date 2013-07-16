@@ -2,10 +2,9 @@
 
 FactoryGirl.define do
   factory :page do
-    title "MyString"
-    company "MyString"
-    image "MyString"
-    comment "MyString"
+    title "Last Page"
+    image File.open(Rails.root.join('spec/fixtures/ada.jpeg'))
+    comment "Kommentar"
     page_nr 1
   end
 end

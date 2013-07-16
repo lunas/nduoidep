@@ -2,6 +2,8 @@
 
 class ImageUploader < CarrierWave::Uploader::Base
 
+  after :store, :copy_image_url
+
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -54,6 +56,10 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   def image?
     true
+  end
+
+  def copy_image_url(file)
+    model.update_attribute(:url, self.url)
   end
 
 end
