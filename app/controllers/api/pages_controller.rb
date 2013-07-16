@@ -1,6 +1,6 @@
 class Api::PagesController < Api::BaseController
 
-  expose(:page) { Page.find(params[:page_id]) }
+  expose(:page) { Page.find(params[:id]) }
 
   expose(:new_page) {
     # We get back a string from the client when posting an page because
@@ -27,7 +27,7 @@ class Api::PagesController < Api::BaseController
 
   def update
     accept_only_json do
-      page.update_attribute( url )
+      page.update_attribute(:url, url )
       send_ok
     end
   end

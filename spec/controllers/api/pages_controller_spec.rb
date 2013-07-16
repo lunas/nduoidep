@@ -55,4 +55,41 @@ describe Api::PagesController do
 
     end
   end
+
+  describe 'update' do
+    before do
+      @issue = create :issue
+      @page  = create :page, issue_id: @issue.id, image: nil
+      @url   = 'http://aws.amazon.com/nguoidep/pages/1/page.jpg'
+    end
+
+    def do_post
+      post :update, format: :json, id: page_id, url: @url
+    end
+
+    context 'with existing page id' do
+
+      let(:page_id) { @page.id }
+
+      it 'returns ok' do
+        do_post
+        response.should be_success
+      end
+
+      it 'updates the url' do
+        expect { do_post }.to change { @page.reload.url }.from(nil).to( @url )
+      end
+    end
+
+    context 'with non-existing page id' do
+
+      let(:page_id) { 24 }
+
+      it 'returns status 404' do
+        do_post
+        response.status.should == 404
+      end
+    end
+
+  end
 end
