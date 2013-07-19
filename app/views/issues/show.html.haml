@@ -167,7 +167,7 @@
      }
      var src, url;
      var url = $(this).find('.turn-page').css('background-image');
-     var src = url.replace('url(', '').replace(')', '');
+     var src = url.replace('url(', '').replace(')', '').replace(/"/g, '');    // a hack!
      zoom_on();
      $('#zoomer img').attr('src', src);
      set_position_close_div();
