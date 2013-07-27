@@ -18,7 +18,7 @@ class Uploader
   IMAGE_PATTERN = '*.jpg'
   BASE_ADDRESS = 'http://www.nguoidepmagazine-ny.com/api'
 
-  attr_reader :images
+  attr_reader :images, :errors
 
   def initialize(dir = IMAGE_DIR, image_pattern = IMAGE_PATTERN, base_addr = BASE_ADDRESS)
     @image_dir = dir
@@ -38,7 +38,7 @@ class Uploader
     begin
       issue_id = create_issue
       @images.each do |image|
-        create_and_upload_page(image)
+        create_and_upload_page(issue_id, image)
       end
     rescue => e
       @errors << e.message
@@ -47,13 +47,13 @@ class Uploader
     end
   end
 
-  def create_and_upload_page(image)
+  def create_and_upload_page(issue_id, image)
     begin
       page_id = create_page(issue_id, image)
       url = upload(page_id, image)
-      update_page(url)
+      update_page(page_id, url)
     rescue => e
-      @erros << e.message
+      @errors << e.message
     end
   end
 
@@ -91,10 +91,10 @@ class Uploader
 
   # Uploads image to aws and returns url.
   def upload_to_aws(page_id, image)
-    page_uploader.page_id = page_id
+    @page_uploader.page_id = page_id
     file = File.open(image)
-    page_uploader.store!(file)
-    page_uploader.url
+    @page_uploader.store!(file)
+    @page_uploader.url
   end
 
   def update_page(page_id, url)

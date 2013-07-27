@@ -129,9 +129,52 @@ describe Uploader do
         expect {@uploader.update_page(1, 'some/url') }.to raise_error
       end
     end
-
   end
 
+  describe 'upload_to_aws' do
+    before do
+      Uploader.any_instance.stubs(:read_image_dir).returns([])
+      @uploader = Uploader.new
+      @image_file_name = "#{File.dirname(__FILE__)}/../fixtures/ada.jpeg"
+    end
 
+    it 'returns the image url which contains the page_id' do
+      url = @uploader.upload_to_aws(9, @image_file_name)
+      (url =~ /9/).should > 0
+      (url =~ /ada.jpeg/).should > 0
+    end
+  end
+
+  describe 'create_and_upload_page' do
+    before do
+      Uploader.any_instance.stubs(:read_image_dir).returns([])
+      @uploader = Uploader.new
+      @image_file_name = "#{File.dirname(__FILE__)}/../fixtures/ada.jpeg"
+    end
+
+    context 'no error happens' do
+      before do
+        @uploader.expects(:create_page).with(1, @image_file_name).returns(:a_pid)
+        @uploader.expects(:upload).with(:a_pid, @image_file_name).returns(:a_url)
+        @uploader.expects(:update_page).with(:a_pid, :a_url)
+      end
+      it 'adds no errors to the error list' do
+        @uploader.create_and_upload_page(1, @image_file_name)
+        @uploader.errors.size.should == 0
+      end
+    end
+
+    context 'an error happens' do
+      before do
+        @uploader.stubs(:create_page).raises(StandardError, 'error message')
+      end
+      it 'adds no errors to the error list' do
+        @uploader.create_and_upload_page(1, @image_file_name)
+        @uploader.errors.size.should == 1
+        @uploader.errors.first.should == 'error message'
+      end
+    end
+
+  end
 
 end
