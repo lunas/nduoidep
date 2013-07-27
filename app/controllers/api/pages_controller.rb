@@ -15,6 +15,8 @@ class Api::PagesController < Api::BaseController
 
   expose(:url) { params[:url] }
 
+  # /api/pages.json
+  #   with body {"page":{"issue_id":10,"page_nr":999, "title":"This is the page title"}}
   def create
     accept_only_json do
       if new_page.save
@@ -25,6 +27,8 @@ class Api::PagesController < Api::BaseController
     end
   end
 
+  # /api/pages/352.json
+  #  with body {"url":"/some/url/to/image.jpg"}
   def update
     accept_only_json do
       page.update_attribute(:url, url )

@@ -11,6 +11,8 @@ class Api::IssuesController < Api::BaseController
     Issue.new(params[:issue])
   }
 
+  # /api/issues.json
+  #   with body {"issue":{"title":"apissu","date":"2013/11/30"}}
   def create
     accept_only_json do
       if new_issue.save

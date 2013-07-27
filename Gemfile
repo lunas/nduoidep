@@ -25,6 +25,7 @@ gem 'ruby_parser'
 gem 'carrierwave'
 gem "fog", "~> 1.3.1"
 
+gem 'rest-client' # used by the local uploader script
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -60,6 +61,8 @@ end
 group :test do
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
+  gem 'mocha', require: false
+  gem 'webmock'
 end
 
 group :production do
