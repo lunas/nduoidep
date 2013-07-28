@@ -1,5 +1,5 @@
 
-Blog::Application.routes.draw do
+Nguoidep::Application.routes.draw do
 
   resources :issues, only: [:show], constraints: {id: /[0-9]+/} do
     scope :format => true, :constraints => { :format => 'json' } do

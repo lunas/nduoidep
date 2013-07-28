@@ -3,6 +3,48 @@ require 'uploader'
 
 describe Uploader do
 
+  describe 'create_base_address' do
+    before do
+      Uploader.any_instance.stubs(:read_image_dir).returns([])
+      @uploader = Uploader.new
+    end
+    context 'server starts with http' do
+      it "doesn't prepend 'http'" do
+        input = 'http://www.example.com/'
+        addr = @uploader.create_base_address(input)
+        addr[0..10].should == input[0..10]
+      end
+    end
+    context 'server starts with https' do
+      it "doesn't prepend anything" do
+        input = 'https://www.example.com/'
+        addr = @uploader.create_base_address(input)
+        addr[0..10].should == input[0..10]
+      end
+    end
+    context 'server does not start with http' do
+      it "prepends 'http://'" do
+        input = 'www.example.com/'
+        addr = @uploader.create_base_address(input)
+        addr[0..10].should == "http://#{input}"[0..10]
+      end
+    end
+    context 'server has trailing "/"' do
+      it 'creates valid url' do
+        input = 'http://www.example.com/'
+        addr = @uploader.create_base_address(input)
+        addr.should == 'http://www.example.com/api'
+      end
+    end
+    context 'server has no trailing "/"' do
+      it 'creates valid url' do
+        input = 'http://www.example.com'
+        addr = @uploader.create_base_address(input)
+        addr.should == 'http://www.example.com/api'
+      end
+    end
+  end
+
   describe 'read_image_dir' do
     before do
       path = "#{File.dirname(__FILE__)}/../fixtures/page_images"
@@ -56,6 +98,40 @@ describe Uploader do
     end
   end
 
+  describe 'get_issue_data' do
+    before do
+      Uploader.any_instance.stubs(:read_image_dir).returns([])
+      @uploader = Uploader.new
+    end
+
+    let(:today) { Time.now.strftime('%Y.%m.%d') }
+
+    context 'User provides title and date' do
+      before do
+        STDIN.stubs(:gets).returns('mag title', '2014.12.24')
+      end
+      it 'returns user provided title and date' do
+        @uploader.get_issue_data.should == ['mag title', '2014.12.24']
+      end
+    end
+    context 'User provides title and invalid date' do
+      before do
+        STDIN.stubs(:gets).returns('mag title', '2014.24.12')
+      end
+      it 'returns user provided title and default date' do
+        @uploader.get_issue_data.should == ['mag title', today ]
+      end
+    end
+    context 'User provides only title, no date' do
+      before do
+        STDIN.stubs(:gets).returns('mag title', "\n")
+      end
+      it 'returns user provided title and default date' do
+        @uploader.get_issue_data.should == ['mag title', today ]
+      end
+    end
+  end
+
   describe 'create_page' do
     before do
       Uploader.any_instance.stubs(:read_image_dir).returns([])
@@ -69,13 +145,13 @@ describe Uploader do
       end
 
       it 'returns the page_id' do
-        @uploader.create_page(1, '027some_title_Done').should == 9
+        @uploader.create_page(1, 'path/to/027some_title_Done').should == 9
       end
     end
 
     context "image name doesn't include page nr" do
       it 'throws a StandardError' do
-        expect { @uploader.create_page(1, 'no_page_nr_in_file_name') }.to raise_error StandardError
+        expect { @uploader.create_page(1, '/path/to/no_page_nr_in_file_name') }.to raise_error StandardError
       end
     end
 
@@ -155,7 +231,7 @@ describe Uploader do
     context 'no error happens' do
       before do
         @uploader.expects(:create_page).with(1, @image_file_name).returns(:a_pid)
-        @uploader.expects(:upload).with(:a_pid, @image_file_name).returns(:a_url)
+        @uploader.expects(:upload_to_aws).with(:a_pid, @image_file_name).returns(:a_url)
         @uploader.expects(:update_page).with(:a_pid, :a_url)
       end
       it 'adds no errors to the error list' do
@@ -174,6 +250,37 @@ describe Uploader do
         @uploader.errors.first.should == 'error message'
       end
     end
+  end
+
+  describe 'run' do
+    before do
+      @images = %w[ path/to/ada.jpg path/to/bea.jpg path/to/cli.jpg]
+      Uploader.any_instance.stubs(:read_image_dir).returns(@images)
+      @uploader = Uploader.new
+      @uploader.expects(:create_issue)
+    end
+
+    context 'no error happens' do
+      before do
+        @uploader.expects(:create_and_upload_page).times(@images.size)
+      end
+      it 'adds no error to error list' do
+        expect { @uploader.run }.to_not change {@uploader.errors}
+      end
+    end
+    context 'an error happens' do
+      before do
+        @uploader.stubs(:create_and_upload_page)
+                 .raises(StandardError, 'error message')
+                 .then.returns(1, 2)
+      end
+      it 'adds no error to error list' do
+        expect { @uploader.run }.to change {
+          @uploader.errors
+        }.from([]).to(['error message'])
+      end
+    end
+
 
   end
 

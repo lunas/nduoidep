@@ -1,5 +1,6 @@
 require 'rest_client'
 require 'page_uploader'
+require 'optparse'
 
 class Uploader
   # Uploads images in image-dir to aws, interacting with ny-nguoidep.com
@@ -14,24 +15,43 @@ class Uploader
   #   use returned url to update page on the server
   # that's it.
 
-  IMAGE_DIR = './pages'
+  IMAGE_DIR = './page_images'
   IMAGE_PATTERN = '*.jpg'
-  BASE_ADDRESS = 'http://www.nguoidepmagazine-ny.com/api'
+  SERVER = 'http://www.nguoidepmagazine-ny.com'
 
   attr_reader :images, :errors
 
-  def initialize(dir = IMAGE_DIR, image_pattern = IMAGE_PATTERN, base_addr = BASE_ADDRESS)
+  def initialize(dir = IMAGE_DIR, image_pattern = IMAGE_PATTERN, server = SERVER)
     @image_dir = dir
     @image_pattern = image_pattern
-    @base_addr = base_addr
+    @base_addr = create_base_address(server)
     @images = read_image_dir
     @errors = []
     @page_uploader = PageUploader.new
+    @num_processed = 0
+  end
+
+  def create_base_address(server)
+    server = 'http://' + server unless server[0..3] == 'http'
+    server = server.gsub(/\/$/,'') + '/api'
+    server
   end
 
   def read_image_dir
     Dir.chdir(@image_dir)
     Dir[@image_pattern].map{ |f| File.expand_path(f) }
+  end
+
+  def show_results
+    puts "Uploaded #{@num_processed} page images to AWS."
+    if @errors.empty?
+      puts "  with no errors."
+    else
+      puts "  with #{@errors.size} errors:"
+      @errors.each do |error|
+        puts "  - #{error}"
+      end
+    end
   end
 
   def run
@@ -42,16 +62,15 @@ class Uploader
       end
     rescue => e
       @errors << e.message
-    ensure
-      display_errors
     end
   end
 
   def create_and_upload_page(issue_id, image)
     begin
       page_id = create_page(issue_id, image)
-      url = upload(page_id, image)
+      url = upload_to_aws(page_id, image)
       update_page(page_id, url)
+      @num_processed += 1
     rescue => e
       @errors << e.message
     end
@@ -67,6 +86,31 @@ class Uploader
     iid
   end
 
+  def get_issue_data
+    puts 'Please enter data for this issue:'
+    print 'Issue title: '
+    title = STDIN.gets.chomp
+    default_date = Time.now.strftime('%Y.%m.%d')
+    print "Issue date (YYYY.MM.DD, default: #{default_date}):"
+    user_date = STDIN.gets.chomp
+    date =get_date_from(user_date, default_date)
+    [title, date]
+  end
+
+  def get_date_from(user_date, default_date)
+    if user_date.empty?
+      default_date
+    else
+      begin
+        Date.parse(user_date).strftime('%Y.%m.%d')
+      rescue
+        puts "Invalid date: #{user_date}. Going to use #{default_date}"
+        default_date
+      end
+    end
+  end
+
+  # Creates a page on server, returns page_id.
   def create_page(issue_id, image)
     page_nr, title = parse_name(image)
     response = post( 'pages', {page:{issue_id: issue_id, page_nr: page_nr, title: title}})
@@ -78,15 +122,11 @@ class Uploader
   end
 
   def parse_name(image)
-    nr = image[0..2].to_i
-    raise StandardError, "Couldn't find page nr in image file name: #{image}" unless nr > 0
-    title = image[3..-1].gsub(/_Done/i, '')
+    filename = File.basename(image)
+    nr = filename[0..2].to_i
+    raise StandardError, "Couldn't find page nr in image file name: #{filename}" unless nr > 0
+    title = filename[3..-1].gsub(/(-Done|_Done|\.jpg|\.jpeg|\.png|\.gif)/i, '')
     [nr, title]
-  end
-
-  def upload(page_id, image)
-    url = upload_to_aws(page_id, image)
-    update_page(page_id, url)
   end
 
   # Uploads image to aws and returns url.
@@ -103,7 +143,6 @@ class Uploader
 
   def post(path, params, method = :post)
     RestClient.send(method, get_url(path),
-    #RestClient.post(get_url(path),
                             params.to_json,
                             content_type: :json,
                             accept: :json)
@@ -116,6 +155,4 @@ class Uploader
   def json_response(body)
     ActiveSupport::JSON.decode(body)
   end
-
-
 end

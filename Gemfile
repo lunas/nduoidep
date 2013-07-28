@@ -52,7 +52,7 @@ gem 'cloudfoundry-devise', :require => 'devise'
 group :development, :test do
   #https://github.com/bkeepers/dotenv
   #Reads environment variables from a .env file in the project root (.gitignored so secret variables aren't in github)
-  gem 'dotenv'
+  gem 'dotenv-rails'
   gem 'rspec-rails'
   gem 'sqlite3'
   gem 'jquery-rails'
