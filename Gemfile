@@ -55,9 +55,10 @@ group :development, :test, :upload do
   #Reads environment variables from a .env file in the project root (.gitignored so secret variables aren't in github)
   gem 'dotenv-rails'
   gem 'rspec-rails'
-  gem 'sqlite3'
   gem 'jquery-rails'
 end
+
+gem 'sqlite3', groups: [:development, :test]
 
 group :test do
   # database_cleaner is not required, but highly recommended
