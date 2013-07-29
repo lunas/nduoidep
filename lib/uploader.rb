@@ -73,7 +73,7 @@ class Uploader
       @num_processed += 1
       puts url
     rescue => e
-      @errors << e.message
+      @errors << "#{e.message} \n    when processing image  #{image}"
     end
   end
 

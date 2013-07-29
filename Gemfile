@@ -18,6 +18,7 @@ gem 'typus'
 gem 'cancan'
 gem 'decent_exposure'
 gem 'kaminari'
+gem 'newrelic_rpm'
 
 gem 'hpricot'
 gem 'ruby_parser'
@@ -82,7 +83,7 @@ end
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
