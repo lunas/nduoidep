@@ -1,5 +1,8 @@
-require 'dotenv/tasks'
-require 'uploader'
+
+if %(development test upload).include?(Rails.env)
+  require 'dotenv/tasks'
+  require 'uploader'
+end
 
 namespace :nguoidep do
 

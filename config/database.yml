@@ -29,3 +29,11 @@ proxied-appfog:
   password: pRO4p1qkifW5c
   port: 10000
   host: 127.0.0.1
+
+upload:
+  adapter: sqlite3
+  encoding: utf8
+  database: nguoidep_production
+  pool: 5
+  username: nguoidep
+  password: nguoidep

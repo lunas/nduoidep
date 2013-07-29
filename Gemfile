@@ -50,7 +50,7 @@ gem "factory_girl_rails"
 gem 'devise'
 gem 'cloudfoundry-devise', :require => 'devise'
 
-group :development, :test do
+group :development, :test, :upload do
   #https://github.com/bkeepers/dotenv
   #Reads environment variables from a .env file in the project root (.gitignored so secret variables aren't in github)
   gem 'dotenv-rails'
