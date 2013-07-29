@@ -31,9 +31,9 @@ proxied-appfog:
   host: 127.0.0.1
 
 upload:
-  adapter: sqlite3
+  adapter: mysql2
   encoding: utf8
-  database: nguoidep_production
+  database: nguoidep_development
   pool: 5
   username: nguoidep
   password: nguoidep
