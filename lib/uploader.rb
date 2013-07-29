@@ -43,7 +43,7 @@ class Uploader
   end
 
   def show_results
-    puts "Uploaded #{@num_processed} page images to AWS."
+    puts "Uploaded #{@num_processed} page images to AWS"
     if @errors.empty?
       puts "  with no errors."
     else
@@ -71,6 +71,7 @@ class Uploader
       url = upload_to_aws(page_id, image)
       update_page(page_id, url)
       @num_processed += 1
+      puts url
     rescue => e
       @errors << e.message
     end
@@ -91,7 +92,7 @@ class Uploader
     print 'Issue title: '
     title = STDIN.gets.chomp
     default_date = Time.now.strftime('%Y.%m.%d')
-    print "Issue date (YYYY.MM.DD, default: #{default_date}):"
+    print "Issue date (YYYY.MM.DD, default: #{default_date}): "
     user_date = STDIN.gets.chomp
     date =get_date_from(user_date, default_date)
     [title, date]

@@ -12,11 +12,6 @@
     = label_tag :page_nr, "Select page:"
     = select_tag(:page_nr, options_for_select((1..@issue.pages.size).to_a) )
 
-  #companies.filter
-    = label_tag :company_id, "Or show pages with an ad for:"
-    = select_tag :company_id, options_for_select([['select a company', 0]] + @issue.companies)
-    %ul.pages
-
 #magazine_container
   #magazine
     - @issue.first_pages.each do |page|
