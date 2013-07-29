@@ -23,6 +23,7 @@ gem 'hpricot'
 gem 'ruby_parser'
 
 gem 'carrierwave'
+gem 'rmagick'
 gem "fog", "~> 1.3.1"
 
 gem 'rest-client' # used by the local uploader script

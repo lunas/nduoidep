@@ -7,21 +7,33 @@ describe PageUploader do
 
   before do
     @uploader = PageUploader.new
-    path = "#{File.dirname(__FILE__)}/../fixtures/ada.jpeg"
     @file = File.open(path)
+    @uploader.page_id = 9
+    @uploader.store!( @file )
   end
 
   after do
-    @uploader.remove!
+    # @uploader.remove!
   end
 
   describe 'store' do
+
+    let(:path) { "#{File.dirname(__FILE__)}/../fixtures/ada.jpeg" }
+
     it 'uploads file to page_id specific path' do
-      @uploader.page_id = 9
-      @uploader.store!( @file )
       (@uploader.url =~ /9/).should > 0
     end
   end
+
+  describe 'resize' do
+
+    let(:path) { "#{File.dirname(__FILE__)}/../fixtures/001large.jpg" }
+
+    it 'resizes the image to width 1040' do
+      @uploader.should have_width(1040)
+    end
+  end
+
 
   #context 'the small version' do
   #  it "should scale down a landscape image to fit within 200 by 200 pixels" do
