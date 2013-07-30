@@ -40,10 +40,4 @@ Nguoidep::Application.configure do
   # prevent loading files from /public/assets
   config.serve_static_assets = true
 
-  # Do not compress assets
-  config.assets.compress = false
-
-  # Expands the lines which load the assets
-  config.assets.debug = true
-
 end

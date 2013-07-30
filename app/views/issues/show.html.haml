@@ -82,34 +82,9 @@
       gradients: !$.isTouch,
       elevation:50,
       when: {
-        turned: function(e, page) {
-          var current_pages = $(this).turn('view')
-          console.log('Current view: ', current_pages);
-          var left_page = current_pages[0]
-          var right_page = current_pages[1]
-          $("#page_nr").val()
-          if (left_page > 0){
-            $(".page_nr_left").text(left_page).show()
-            $(".turn_page_left").show()
-          }
-          else {
-            $(".page_nr_left").hide()
-            $(".turn_page_left").hide()
-          }
-          if (right_page > 0)
-            $(".page_nr_right").text(right_page).show()
-          else
-            $(".page_nr_right").hide()
-          var last_page = $(this).turn("pages")
-          if (left_page == last_page || right_page == last_page)
-            $(".turn_page_right").hide();
-          else
-            $(".turn_page_right").show();
-
-          $(".page_nr_right").text(current_pages[1])
-        },
         turning: function(e, page, view) {
           console.log('turning')
+          update_page_controls(view)
           zoom_off();
           // Gets the range of pages that the book needs right now
           var range = $(this).turn('range', page);
@@ -127,6 +102,29 @@
     else if (e.keyCode==39)
       $('#magazine').turn('next');
   });
+
+  function update_page_controls(current_pages){
+    var left_page = current_pages[0]
+    var right_page = current_pages[1]
+    $("#page_nr").val()
+    if (left_page > 0){
+      $(".page_nr_left").text(left_page).show()
+      $(".turn_page_left").show()
+    }
+    else {
+      $(".page_nr_left").hide()
+      $(".turn_page_left").hide()
+    }
+    if (right_page > 0)
+      $(".page_nr_right").text(right_page).show()
+    else
+      $(".page_nr_right").hide()
+    var last_page = $(this).turn("pages")
+    if (left_page == last_page || right_page == last_page)
+      $(".turn_page_right").hide();
+    else
+      $(".turn_page_right").show();
+  }
 
   var page_corner = new function(){
     this.magazine_left  = $('#magazine').offset().left;
