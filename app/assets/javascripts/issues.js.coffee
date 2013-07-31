@@ -10,7 +10,14 @@ $(document).ready ->
 
   $("#page_nr").change (event)->
     page_nr = $("#page_nr option:selected").val()
-    $("#magazine").turn("page", page_nr)
+    # first load page if it is missing
+    mag = $('#magazine')
+    mag.turn("page", parseInt page_nr)
+    # turnjs doesn't display the page if it wasn't loaded yet
+    # therefore issue the page command again (hack!):
+    setTimeout (->
+      mag.turn("page", parseInt page_nr)
+    ), 500
     false
 
   $(".turn_page_left").click (e) ->

@@ -89,8 +89,8 @@
           // Gets the range of pages that the book needs right now
           var range = $(this).turn('range', page);
           // Check if each page is within the book
-          for (page = range[0]; page<=range[1]; page++)
-              addPage(page, $(this));
+          for (p = range[0]; p<=range[1]; p++)
+              addPage(p, $(this));
         },
       }
     });
