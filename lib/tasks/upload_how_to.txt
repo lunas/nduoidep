@@ -1,0 +1,8 @@
+RAILS_ENV=upload bundle exec rake nguoidep:upload
+
+given that 
+* images are in rails_dir/page_images
+* have ending *.jpg
+* nguoidep-server is www.nguoidepmagazine-ny.com
+
+otherwise change env parameters.
