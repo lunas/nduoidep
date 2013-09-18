@@ -18,6 +18,7 @@ header.home {
   }
   h1 {
     font-size: 3em;
+    line-height: 1.2em;
   }
 }
 #left_image_box {
@@ -40,10 +41,13 @@ header.home {
 section.home {
   margin-top: 300px;
   //background-image: image-url("Nguoidep_HomePage.png");
-  font-family: "Times New Roman", Times, serif;
-  font-size: 1.5em;
+  //font-family: "Times New Roman", Times, serif;
+  //font-size: 1.5em;
 
   .menu {
+    p {
+      margin-bottom: 0em;
+    }
     .box {
       display: inline-block;
       padding: 20px 20px 20px 0;

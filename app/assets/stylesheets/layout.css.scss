@@ -6,6 +6,28 @@ html, body {
   font-size: 90%;
 }
 
+h1 {
+  font-size: 3em;
+  line-height: 3em;
+}
+
+h2 {
+  font-size: 2em;
+  line-height: 3em;
+}
+
+h3 {
+  font-size: 1.5em;
+  line-height: 3em;
+}
+
+p, table {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 18px;
+  line-height: 1.5em;
+  margin-bottom: 1em;
+}
+
 a img {
   border: none;
 }
@@ -16,6 +38,56 @@ a, a:visited {
 a:hover, a:active, a:focus {
   color: yellow;
   background-color: black;
+}
+
+td {
+ padding-right: 10px;
+}
+
+/////////////// Advertising ///////////////
+
+#notes {
+  display: inline-block;
+  float: left;
+  width: 600px;
+  overflow-x: hidden;
+  margin-right: 100px;
+}
+#hints {
+  display: inline-block;
+  float: left;
+  width: 400px;
+  overflow-x: hidden;
+
+  div.important {
+    border: 1px solid black;
+    padding: 20px;
+    margin-bottom: 40px;
+  }
+}
+table#prices {
+  border-collapse:separate;
+  border-spacing:0px 10px;
+  th {
+    font-weight: bold;
+    padding-right: 40px;
+    margin-bottom: 5px;
+  }
+  td {
+    font-weight: normal;
+    padding-right: 40px;
+  }
+  td.note {
+    vertical-align: top;
+    border-left: 1px solid black;
+    padding-right: 0px;
+    padding-left: 10px
+  }
+}
+
+span.important {
+  text-transform:uppercase;
+  letter-spacing: 0.2em;
 }
 
 .clear {
