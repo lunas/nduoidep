@@ -21,7 +21,7 @@ h3 {
   line-height: 3em;
 }
 
-p, table {
+p, table, ul {
   font-family: "Times New Roman", Times, serif;
   font-size: 18px;
   line-height: 1.5em;
@@ -46,25 +46,6 @@ td {
 
 /////////////// Advertising ///////////////
 
-#notes {
-  display: inline-block;
-  float: left;
-  width: 600px;
-  overflow-x: hidden;
-  margin-right: 100px;
-}
-#hints {
-  display: inline-block;
-  float: left;
-  width: 400px;
-  overflow-x: hidden;
-
-  div.important {
-    border: 1px solid black;
-    padding: 20px;
-    margin-bottom: 40px;
-  }
-}
 table#prices {
   border-collapse:separate;
   border-spacing:0px 10px;
@@ -89,6 +70,14 @@ span.important {
   text-transform:uppercase;
   letter-spacing: 0.2em;
 }
+
+ul {
+  list-style-type: square;
+  margin-left: 20px;
+  padding: 3px 0 0 5px;
+}
+
+///////////////////////////////////////
 
 .clear {
   clear: both;
