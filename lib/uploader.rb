@@ -91,7 +91,7 @@ class Uploader
     puts 'Please enter data for this issue:'
     print 'Issue title: '
     title = STDIN.gets.chomp
-    default_date = Time.now.strftime('%Y.%m.%d')
+    default_date = "#{Time.now.strftime("%Y.%m")}.01"
     print "Issue date (YYYY.MM.DD, default: #{default_date}): "
     user_date = STDIN.gets.chomp
     date =get_date_from(user_date, default_date)
@@ -122,12 +122,33 @@ class Uploader
     pid
   end
 
+  # Extract number and title from image filename
   def parse_name(image)
     filename = File.basename(image)
+    nr = filename[0..2]
+    # covers usually start with 000 and have a number later in the filename
+    if nr == '000'
+      nr_start_index = filename[3..-1] =~ /\d+/
+      nr = $&.to_i                                  # $& holds the matched text from the last =~
+      title_index = nr_start_index + $&.length + 3  # + 3 because we already cut the first three characters
+    else
+      nr = nr.to_i
+      title_index = 3
+    end
+    raise StandardError, "Couldn't find page nr in image file name: #{filename}" unless nr > 0
+    title = filename[title_index..-1].gsub(/(-Done|_Done|\.jpg|\.jpeg|\.png|\.gif)/i, '')
+    title.gsub!( /^(_|-)/, '')    # chop leading _ or -
+    [nr, title]
+  end
+
+  def parse_nr(filename)
+    nr = filename[0..2]
+    if nr == '000'
+      nr = filename[3..-1] =~ /\d+/
+    end
     nr = filename[0..2].to_i
     raise StandardError, "Couldn't find page nr in image file name: #{filename}" unless nr > 0
-    title = filename[3..-1].gsub(/(-Done|_Done|\.jpg|\.jpeg|\.png|\.gif)/i, '')
-    [nr, title]
+
   end
 
   # Uploads image to aws and returns url.

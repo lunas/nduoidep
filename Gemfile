@@ -43,7 +43,6 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'haml-rails'
 #gem 'omniauth-twitter'
 #gem "omniauth-facebook"
 gem "factory_girl_rails"
@@ -68,10 +67,10 @@ group :test do
   gem 'webmock'
 end
 
-group :production do
-  gem 'pg'
-  gem 'cloudfoundry-jquery-rails'
-end
+# group :production do
+#   gem 'pg'
+#   gem 'cloudfoundry-jquery-rails'
+# end
 
 # Background workers talking to redis server
 # gem 'resque', :require => 'resque/server'

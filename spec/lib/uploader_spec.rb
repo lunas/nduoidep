@@ -104,7 +104,7 @@ describe Uploader do
       @uploader = Uploader.new
     end
 
-    let(:today) { Time.now.strftime('%Y.%m.%d') }
+    let(:issue_date) { Time.now.strftime('%Y.%m') + '.01' }
 
     context 'User provides title and date' do
       before do
@@ -119,7 +119,7 @@ describe Uploader do
         STDIN.stubs(:gets).returns('mag title', '2014.24.12')
       end
       it 'returns user provided title and default date' do
-        @uploader.get_issue_data.should == ['mag title', today ]
+        @uploader.get_issue_data.should == ['mag title', issue_date ]
       end
     end
     context 'User provides only title, no date' do
@@ -127,7 +127,7 @@ describe Uploader do
         STDIN.stubs(:gets).returns('mag title', "\n")
       end
       it 'returns user provided title and default date' do
-        @uploader.get_issue_data.should == ['mag title', today ]
+        @uploader.get_issue_data.should == ['mag title', issue_date ]
       end
     end
   end
@@ -247,12 +247,58 @@ describe Uploader do
       it 'adds no errors to the error list' do
         @uploader.create_and_upload_page(1, @image_file_name)
         @uploader.errors.size.should == 1
-        @uploader.errors.first.should == 'error message'
+        @uploader.errors.first.should =~ /error message/
       end
     end
   end
 
-  describe 'run' do
+  describe 'parse_name' do
+    before do
+      Uploader.any_instance.stubs(:read_image_dir).returns([])
+      @uploader = Uploader.new
+    end
+
+    context 'filename has correct format' do
+
+      it 'parses filenames starting with numbers like 001' do
+        image_filename = '/Users/lukas/workspaces/nduoidep/page_images/2015jan-issues/001BacAi_TrungTinBaoHiem-Done.jpg'
+        @uploader.parse_name( image_filename ).should == [1, 'BacAi_TrungTinBaoHiem']
+      end
+
+      it 'parses filenames starting with numbers like 011' do
+        image_filename = '/Users/lukas/workspaces/nduoidep/page_images/2015jan-issues/011BacAi_TrungTinBaoHiem-Done.jpg'
+        @uploader.parse_name( image_filename ).should == [11, 'BacAi_TrungTinBaoHiem']
+      end
+
+      it 'parses filenames starting with numbers like 111' do
+        image_filename = '/Users/lukas/workspaces/nduoidep/page_images/2015jan-issues/111BacAi_TrungTinBaoHiem-Done.jpg'
+        @uploader.parse_name( image_filename ).should == [111, 'BacAi_TrungTinBaoHiem']
+      end
+
+      it 'parses filenames starting with 000' do
+        image_filename = '/Users/lukas/workspaces/nduoidep/page_images/2015jan-covers/000Cover-02_NOHOpharmacy-Done.jpg'
+        @uploader.parse_name( image_filename ).should == [2, 'NOHOpharmacy']
+      end
+
+    end
+
+    context 'filename has wrong format' do
+
+      it 'throws an error if the filename does not start with a number' do
+        image_filename = '/Users/lukas/workspaces/nduoidep/page_images/2015jan-issues/BacAi_TrungTinBaoHiem-Done.jpg'
+        expect { @uploader.parse_name( image_filename ) }.to raise_error StandardError
+      end
+
+      it 'throws an error if the filenam starts with 000 but does not have another number' do
+        image_filename = '/Users/lukas/workspaces/nduoidep/page_images/2015jan-covers/000Cover_NOHOpharmacy-Done.jpg'
+        expect { @uploader.parse_name( image_filename ) }.to raise_error StandardError
+      end
+
+    end
+
+  end
+
+    describe 'run' do
     before do
       @images = %w[ path/to/ada.jpg path/to/bea.jpg path/to/cli.jpg]
       Uploader.any_instance.stubs(:read_image_dir).returns(@images)
