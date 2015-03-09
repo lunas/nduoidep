@@ -4,5 +4,12 @@ given that
 * images are in rails_dir/page_images
 * have ending *.jpg
 * nguoidep-server is www.nguoidepmagazine-ny.com
+* the file .env in the rails root directory contains the correct AWS key ID and secret
 
-otherwise change env parameters.
+otherwise change .env parameters.
+
+
+NOTE: if you get this error when starting rake:
+  dlopen(/Users/lukas/.rbenv/versions/1.9.2-p290/lib/ruby/gems/1.9.1/gems/rmagick-2.13.2/lib/RMagick2.bundle, 9): Library not loaded: /usr/local/lib/libMagickCore-6.Q16.1.dylib
+Try:
+  gem pristine rmagick
